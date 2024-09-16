@@ -1,0 +1,57 @@
+{% extends 'navbars/dataentryactions.html' %}
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+        text-transform: uppercase;
+    }
+    #message{
+        text-align: center;
+        color: blue;
+        font-weight: 800;
+        text-transform: uppercase;
+        padding: 10px;
+    }
+</style>
+<h2>Intermediary list page</h2>
+{% for message in messages %}
+<p id="message">{{message}}</p>
+{% endfor %}
+<form method= 'post'class="d-flex" role="search">
+  {% csrf_token %}
+  {{ myFilter.form.as_p }}
+  <button class="btn btn-primary" type="submit">Search</button>
+</form>
+<table style="margin-top: 20px;" class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Position ID</th>
+        <th scope="col">Position Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    {% if positions %}
+
+    {% for position in positions %}
+    <tbody>
+      <tr>
+        <td>{{position.id}}</td>
+        <td>{{position.position}}</td>
+        
+        <td>
+            <a href="{% url 'editintermediary' intermediary.id  %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'deleteintermediary' intermediary.id  %}" class="btn btn-danger">Delete</a>
+            
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+    {% else %}
+    <tbody>
+      <tr>
+        <td colspan="6">No intermediaries found</td>
+      </tr>
+    </tbody>
+    {% endif %}
+  </table>
+{% endblock %}

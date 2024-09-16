@@ -1,0 +1,88 @@
+{% if is_dataentry %}
+{% include 'navbars/dataentryactions.html' %}
+{% endif %}
+{% if is_finance %}
+{% include 'navbars/financenavbar.html' %}
+{% endif %}
+
+{% block content %}
+<style>
+    #message{
+        text-align: center;
+        color: blue;
+        font-weight: 800;
+        text-transform: uppercase;
+        padding: 10px;
+    }
+</style>
+<h2 style="text-align: center;">Lotus Student Donor History</h2>
+<div class="main">
+    {% for message in messages %}
+    <p id="message">{{message}}</p>
+    {% endfor %}
+    <form method= 'post'class="d-flex" role="search">
+            {% csrf_token %}
+            {{ myFilter.form.as_p }}
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+    <table style="margin-top: 20px;" class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">StudentID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Intermediary</th>
+            <th scope="col">Level</th>
+            <th scope="col">Donor</th>
+            <th scope="col">Primary School</th>
+            <th scope="col">Secondary School</th>
+            <th scope="col">Tertiary School</th>
+            <th scope="col">Class</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        {% if students %}
+
+        {% for student in students %}
+        <tbody>
+          <tr>
+            <td>
+                <a href="{% url 'student_profile' student.id %}"class="btn btn-primary">{{student.id}}</a>
+            </td>
+            <td>{{student.student.studentName}}</td>
+            <td>{{student.student.gender}}</td>
+            <td>{{student.student.intermediary}}</td>
+            <td>{{student.student.level}}</td>
+            <td>{{student.donor}}</td>
+            <td>{{student.student.primary_school}}</td>
+            <td>{{student.student.secondary_school}}</td>
+            <td>{{student.student.tertiary_school}}</td>
+            <td>{{student.class_level}}</td>
+            {% if is_dataentry %}
+            <td>
+                <a href="{% url 'edit_student' student.id %}"class="btn btn-primary">Edit</a>
+                <a href="{% url 'deletestudent' student.id %}"class="btn btn-danger">Delete</a>
+                
+            </td>
+            {% elif is_finance %}
+            <td>
+               <a href=""class="btn btn-primary">Add Fee Payments</a>
+
+            </td>
+            {% endif %}
+            
+          </tr>
+        </tbody>
+        {% endfor %}
+        {% else %}
+        <tbody>
+          <tr>
+            <td colspan="10">No students found</td>
+          </tr>
+        </tbody>
+        {% endif %}
+      </table>
+    <a href="{% url 'forgot_password' %}" class="btn btn-primary">Print Students</a>
+
+</div>
+{% endblock %}

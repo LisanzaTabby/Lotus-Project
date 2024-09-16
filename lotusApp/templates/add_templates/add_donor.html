@@ -1,0 +1,50 @@
+{% extends 'navbars/financenavbar.html' %}
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+    }
+    .main{
+        margin: 20px;
+        padding: 20px;
+        background: aqua;
+        border-radius: 10px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 1em;
+    }
+    .main form{
+        font-weight: 600;        
+    }
+    .mb-4{
+        margin: 20px;
+    }
+</style>
+<h2>Add Donor Form</h2>
+<div class="main">
+    <form method="post"enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-4">
+            {{form.donorName.label_tag}}
+            {{form.donorName}}
+        </div>
+        <div class="mb-4">
+            {{form.donorEmail.label_tag}}
+            {{form.donorEmail}}
+        </div>
+        <div class="mb-4">
+            {{form.donorPhone.label_tag}}
+            {{form.donorPhone}}
+        </div>
+        <div class="mb-4">
+            {{form.gender.label_tag}}
+            {{form.gender}}
+        </div>        
+        <button class="btn btn-primary" type="submit">Save</button>
+        
+    </form>
+</div>
+
+{% endblock %}  

@@ -1,0 +1,86 @@
+{% extends 'navbars/indexnavbar.html' %}
+{% block content %}
+<style>
+    .main .content{
+      text-transform: uppercase;
+      font-size: 30px;
+      font-weight: 700;
+  }
+  .main .form{
+      padding: 30px;
+      border-radius: 10px;
+      display: grid;
+      place-content: center;
+      grid-template-columns: auto;
+      font-size: 30px;
+      background: #fff;
+      font-weight: 600;
+  }
+  .main .form form input{
+      font-size: 15px;
+      height: 20px;
+  }
+  .main .form form input:focus{
+    outline-color: blue;
+  }
+  .main .form form input[type= submit]{
+      background: aqua;
+      height: 30px;
+      border: 0px solid;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 10px;
+      border-radius: 10px;
+      color: red;
+      transition: all 0.5s ease;    
+  }
+  .main .form form input[type= submit]:hover{
+      background: black;
+      color: #fff;
+  
+  }
+  .main .reset a{
+      color: blue;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.5s ease;
+  }
+  .main .reset a:hover{
+      color: rgb(255, 0, 43);
+  }
+  .message{
+      color: red;
+      background: aqua;
+      padding: 10px;
+      margin-top: 10px;
+  
+  }
+  
+  </style>
+  <div class="main">
+      <div class="form">
+          <form method="post">
+            {% csrf_token %}
+            
+            {% for message in messages%}
+            <p class='message'>{{message}}</p>
+            {% endfor%}
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username"placeholder="Your Username" required>
+              </div>
+              <div>
+                  <label for="password">Password:</label>
+                  <input type="password" id="password" name="password"placeholder="Your Password" required>
+              </div>
+              <input type="submit" value="login">
+              <div class="reset">
+                  <a href="">Forgot Password?</a>
+              </div>
+          </form>
+          
+          
+      </div>
+  
+  </div>
+  {% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'navbars/dataentryactions.html' %}
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+    }
+    .main{
+        margin: 20px;
+        padding: 20px;
+        background: aqua;
+        border-radius: 10px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 1em;
+    }
+    .main form{
+        font-weight: 600;        
+    }
+    .mb-4{
+        margin: 20px;
+    }
+</style>
+<h2>Add Donor Form</h2>
+<div class="main">
+    <form method="post"enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-4">
+            {{form.schoolName.label_tag}}
+            {{form.schoolName}}
+        </div>
+        <div class="mb-4">
+            {{form.schoolEmail.label_tag}}
+            {{form.schoolEmail}}
+        </div>
+        <div class="mb-4">
+            {{form.level.label_tag}}
+            {{form.level}}
+        </div>
+        <div class="mb-4">
+            {{form.phone.label_tag}}
+            {{form.phone}}
+        </div>
+        <div class="mb-4">
+            {{form.location.label_tag}}
+            {{form.location}}
+        </div>        
+        <button class="btn btn-primary" type="submit">Save</button>
+        
+    </form>
+</div>
+
+{% endblock %}  

@@ -1,0 +1,68 @@
+{% extends 'navbars/dataentryactions.html' %}
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+        text-transform: uppercase;
+    }
+    #message{
+        text-align: center;
+        color: blue;
+        font-weight: 800;
+        text-transform: uppercase;
+        padding: 10px;
+    }
+</style>
+<h2>Intermediary list page</h2>
+{% for message in messages %}
+<p id="message">{{message}}</p>
+{% endfor %}
+<form method= 'post'class="d-flex" role="search">
+  {% csrf_token %}
+  {{ myFilter.form.as_p }}
+  <button class="btn btn-primary" type="submit">Search</button>
+</form>
+<table style="margin-top: 20px;" class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">School ID</th>
+        <th scope="col">School Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">ContactPerson</th>
+        <th scope="col">Location</th>
+        <th scope="col">Date added</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    {% if intermediaries %}
+
+    {% for intermediary in intermediaries %}
+    <tbody>
+      <tr>
+        <td>{{intermediary.id}}</td>
+        <td>{{intermediary.intermediaryName}}</td>
+        <td>{{intermediary.intermediaryEmail}}</td>
+        <td>{{intermediary.intermediaryPhone}}</td>
+        <td>{{intermediary.contactPerson}}</td>
+        <td>{{intermediary.location}}</td>
+        <td>{{intermediary.date_added}}</td>
+        <td>
+            <a href="" class="btn btn-primary">Edit</a>
+            <a href="" class="btn btn-danger">Delete</a>
+            
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+    {% else %}
+    <tbody>
+      <tr>
+        <td colspan="6">No intermediaries found</td>
+      </tr>
+    </tbody>
+    {% endif %}
+  </table>
+  <a href="" class="btn btn-primary">Print Students</a>
+
+{% endblock %}

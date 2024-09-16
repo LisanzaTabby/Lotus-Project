@@ -1,0 +1,80 @@
+{% extends 'navbars/donor_navbar.html' %}
+{% block content %}
+<style>
+    .container1{
+        margin: 20px;
+    }
+    .container1 h2{
+        color: rgb(1, 153, 138);
+        font-weight: 700;
+        margin:20px;
+        text-align: center;
+    }
+    .container2{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 20px;
+        background: aqua;
+        border-radius: 10px;
+    }
+    .container2 .stats{
+        padding: 20px;
+        background: white;
+        color: rgb(236, 59, 89);
+        text-transform: uppercase;
+        font-weight: 700;
+        text-align: center;
+        border-radius: 5px;
+    }
+</style>
+
+<form method= 'post'class="d-flex" role="search">
+    {% csrf_token %}
+    {{ myFilter.form.as_p }}
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+<table style="margin-top: 20px;" class="table table-bordered">
+<thead>
+  <tr>
+    <th scope="col">StudentID</th>
+    <th scope="col">Student Name</th>
+    <th scope="col">Gender</th>
+    <th scope="col">Intermediary</th>
+    <th scope="col">Level</th>
+    <th scope="col">Donor</th>
+    <th scope="col">Primary School</th>
+    <th scope="col">Secondary School</th>
+    <th scope="col">Tertiary School</th>
+    <th scope="col">Class</th>
+  </tr>
+</thead>
+{% if students %}
+
+{% for student in students %}
+<tbody>
+  <tr>
+    <td>
+        <a href="{% url 'student_profile' student.id %}"class="btn btn-primary">{{student.id}}</a>
+    </td>
+    <td>{{student.studentName}}</td>
+    <td>{{student.gender}}</td>
+    <td>{{student.intermediary}}</td>
+    <td>{{student.level}}</td>
+    <td>{{student.donor}}</td>
+    <td>{{student.primary_school}}</td>
+    <td>{{student.secondary_school}}</td>
+    <td>{{student.tertiary_school}}</td>
+    <td>{{student.class_level}}</td>
+  </tr>
+</tbody>
+{% endfor %}
+{% else %}
+<tbody>
+  <tr>
+    <td colspan="10">No students found</td>
+  </tr>
+</tbody>
+{% endif %}
+</table>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'navbars/financenavbar.html' %}
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+    }
+    .main{
+        margin: 20px;
+        padding: 20px;
+        background: aqua;
+        border-radius: 10px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 1em;
+    }
+    .main form{
+        font-weight: 600;        
+    }
+    .mb-4{
+        margin: 20px;
+    }
+</style>
+<h2>Fee Commitment Form</h2>
+<div class="main">
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-4">
+            {{form.donor.label_tag}}
+            {{form.donor}}
+        </div>
+        <div class="mb-4">
+            {{form.committed_amount.label_tag}}
+            {{form.committed_amount}}
+        </div>
+        <div class="mb-4">
+            {{form.contributed_amount.label_tag}}
+            {{form.contributed_amount}}
+        </div>
+        <div class="mb-4">
+            {{form.year.label_tag}}
+            {{form.year}}
+        </div>        
+        <button class="btn btn-primary" type="submit">Save</button>
+        
+    </form>
+</div>
+
+{% endblock %}  

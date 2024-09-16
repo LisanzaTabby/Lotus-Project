@@ -1,0 +1,229 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background: aqua;
+}
+.toppage{
+    padding-bottom: 200px;
+    padding-top: 100px;
+    padding-left: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+   
+}
+.pagename{
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+}
+.navbar ul{
+    display: flex;
+}
+.navbar ul a{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 20px;
+    padding: 30px;
+    transition: all 0.5s linear;
+}
+.navbar ul a:hover{
+    background: aqua;
+    color: black;
+    font-size: 25px;
+}
+.navbar ul a li{
+    list-style: none;
+}
+.navbar ul .profile img{
+    height: 80px;
+    width: 80px;
+}
+.navbar ul .username{
+    color: white;
+    font-weight: 600;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+.navbar ul form input{
+    margin-top: 30px;
+    margin-left: 30px;
+    height: 40px;
+    width: 120px;
+    padding: 5px;
+    background: aqua;
+    font-weight: 700;
+    border-radius: 10px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.main{
+    padding: 100px;
+}
+.main .content{
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+footer{
+    position: relative;
+    height: auto;
+    padding: 50px 100px;
+    background: rgb(1, 121, 121);
+}
+footer .container{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+
+}
+footer .container .aboutussec h2{
+    position: relative;
+    color: black;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+footer .container .aboutussec h2::before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: rgb(255, 0, 43);
+}
+footer .container .quicklinkssec h2{
+    position: relative;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+footer .container .quicklinkssec h2::before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: rgb(255, 0, 43);
+
+}
+footer .container .contactssec h2{
+    position: relative;
+    color: black;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+footer .container .contactssec h2::before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: rgb(255, 0, 43);    
+}
+footer .container .aboutussec p{
+    color: black;
+}
+.sci{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 50px);
+    grid-gap: 10px;
+
+}
+.sci li{
+    list-style: none;
+
+}
+.sci li a{
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.sci li a:hover{
+    background: rgb(255, 0, 43);
+    
+}
+.sci li a img{
+    height: 30px;
+    width: 30px;
+}
+.quicklinkssec{
+    position: relative;
+}
+.quicklinkssec li{
+    list-style: none;
+
+}
+.quicklinkssec li a{
+    text-decoration: none;
+    color: black;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.quicklinkssec li a:hover{
+    color: rgb(255, 0, 43);
+}
+.info{
+    position: relative;
+}
+.info li{
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    margin-bottom: 16px;
+    list-style: none;
+}
+.info li img{
+    height: 30px;
+    width: 30px;
+    
+}
+.info li span{
+    color: black;
+}
+.info a{
+    text-decoration: none;
+    color: black;
+}
+.info a:hover{
+    color: rgb(255, 0, 43);
+}
+.copyrighttext{
+    background: rgb(48, 12, 12);
+    padding: 8px 100px;
+    text-align: center;
+    color: #fff;
+}
+/* making it responsive */
+@media (max-width: 991px){
+    footer{
+        padding: 40px;
+    }
+    footer .container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .copyrighttext{
+        padding: 8px 40px;
+    }
+}
+@media (max-width: 768px){
+    footer .container{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

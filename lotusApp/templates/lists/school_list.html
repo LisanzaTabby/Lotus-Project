@@ -1,0 +1,62 @@
+{% extends 'navbars/dataentryactions.html' %}
+{% block content %}
+<style>
+    #message{
+        text-align: center;
+        color: blue;
+        font-weight: 800;
+        text-transform: uppercase;
+        padding: 10px;
+    }
+</style>
+<h2 style="text-align: center;">School List Page</h2>
+<div class="main">
+    {% for message in messages %}
+    <p id="message">{{message}}</p>
+    {% endfor %}
+    <form method= 'post'class="d-flex" role="search">
+      {% csrf_token %}
+      {{ myFilter.form.as_p }}
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <table style="margin-top: 20px;" class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">SchoolID</th>
+            <th scope="col">School Name</th>
+            <th scope="col">School Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Level</th>
+            <th scope="col">Location</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        {% if schools %}
+
+        {% for school in schools %}
+        <tbody>
+          <tr>
+            <td>{{school.id}}</td>
+            <td>{{school.schoolName}}</td>
+            <td>{{school.schoolEmail}}</td>
+            <td>{{school.phone}}</td>
+            <td>{{school.level}}</td>
+            <td>{{school.location}}</td>
+            <td>
+                <a href=""class="btn btn-primary">Edit</a>
+                <a href=""class="btn btn-danger">Delete</a>
+                
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+        {% else %}
+        <tbody>
+          <tr>
+            <td colspan="10">No schools found</td>
+          </tr>
+        </tbody>
+        {% endif %}
+      </table>
+</div>
+{% endblock %}

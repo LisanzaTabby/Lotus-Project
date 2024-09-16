@@ -1,0 +1,54 @@
+{% extends 'navbars/financenavbar.html' %}
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+    }
+    .main{
+        margin: 20px;
+        padding: 20px;
+        background: aqua;
+        border-radius: 10px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 1em;
+    }
+    .main form{
+        font-weight: 600;        
+    }
+    .mb-4{
+        margin: 20px;
+    }
+</style>
+<h2>Add Employee Form</h2>
+<div class="main">
+    <form method="post"enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-4">
+            {{form.employeeName.label_tag}}
+            {{form.employeeName}}
+        </div>
+        <div class="mb-4">
+            {{form.employeeEmail.label_tag}}
+            {{form.employeeEmail}}
+        </div>
+        <div class="mb-4">
+            {{form.employeePhone.label_tag}}
+            {{form.employeePhone}}
+        </div>
+        <div class="mb-4">
+            {{form.gender.label_tag}}
+            {{form.gender}}
+        </div>        
+        <div class="mb-4">
+            {{form.department.label_tag}}
+            {{form.department}}
+        </div>        
+        <button class="btn btn-primary" type="submit">Save</button>
+        
+    </form>
+</div>
+
+{% endblock %}  

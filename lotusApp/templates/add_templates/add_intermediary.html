@@ -1,0 +1,57 @@
+{% extends 'navbars/dataentryactions.html' %}
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+    }
+    .main{
+        margin: 20px;
+        padding: 20px;
+        background: aqua;
+        border-radius: 10px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 1em;
+    }
+    .main form{
+        font-weight: 600;        
+    }
+    .mb-4{
+        margin: 20px;
+    }
+</style>
+<h2>Add Intermediary Form</h2>
+<div class="main">
+    <form method="post"enctype="multipart/form-data">
+        {% for message in messages %}
+        <p style="color: red;text-transform: uppercase;">{{ message }}</p>
+        {% endfor%}
+        {% csrf_token %}
+        <div class="mb-4">
+            {{form.intermediaryName.label_tag}}
+            {{form.intermediaryName}}
+        </div>
+        <div class="mb-4">
+            {{form.intermediaryEmail.label_tag}}
+            {{form.intermediaryEmail}}
+        </div>
+        <div class="mb-4">
+            {{form.intermediaryPhone.label_tag}}
+            {{form.intermediaryPhone}}
+        </div>
+        <div class="mb-4">
+            {{form.contactPerson.label_tag}}
+            {{form.contactPerson}}
+        </div>
+        <div class="mb-4">
+            {{form.location.label_tag}}
+            {{form.location}}
+        </div>        
+        <button class="btn btn-primary" type="submit">Save</button>
+        
+    </form>
+</div>
+
+{% endblock %}  

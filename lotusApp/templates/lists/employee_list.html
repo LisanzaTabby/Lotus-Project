@@ -1,0 +1,63 @@
+{% extends 'navbars/financenavbar.html' %}
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+        text-transform: uppercase;
+    }
+    #message{
+        text-align: center;
+        color: blue;
+        font-weight: 800;
+        text-transform: uppercase;
+        padding: 10px;
+    }
+</style>
+<h2>Employee list page</h2>
+{% for message in messages %}
+<p id="message">{{message}}</p>
+{% endfor %}
+<table style="margin-top: 20px;" class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Employee Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Employee Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Department</th>
+        <th scope="col">Date joined</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    {% if employees %}
+
+    {% for employee in employees %}
+    <tbody>
+      <tr>
+        <td>{{employee.id}}</td>
+        <td>{{employee.employeeName}}</td>
+        <td>{{employee.gender}}</td>
+        <td>{{employee.employeeEmail}}</td>
+        <td>{{employee.employeePhone}}</td>
+        <td>{{employee.department}}</td>
+        <td>{{employee.date_joined}}</td>
+        <td>
+            <a href="{% url 'edit_employee' employee.id  %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_employee' employee.id  %}" class="btn btn-danger">Delete</a>
+            
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+    {% else %}
+    <tbody>
+      <tr>
+        <td colspan="6">No intermediaries found</td>
+      </tr>
+    </tbody>
+    {% endif %}
+  </table>
+  <a href="{% url 'forgot_password' %}" class="btn btn-primary">Print Employee List</a>
+
+{% endblock %}

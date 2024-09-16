@@ -1,0 +1,43 @@
+{% extends 'navbars/dataentryactions.html' %}
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+    }
+    .main{
+        margin: 20px;
+        padding: 20px;
+        background: aqua;
+        border-radius: 10px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 1em;
+    }
+    .main form{
+        font-weight: 600;        
+    }
+    .mb-4{
+        margin: 10px;
+    }
+</style>
+<h2>Update Academic Progress For {{ student.studentName}}</h2>
+<div class="main">
+    <form method="POST">
+        {% csrf_token %}
+        <label for="year">Year:</label>
+        <select name="year" id="year">
+            <option value="Select year">Select Year</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+        </select><br>
+
+        <label for="status">Class:</label>
+        <input type="text" name="class_level" id="class_level" required><br>
+            
+        <button class="btn btn-primary" type="submit">Update</button>
+        
+    </form>
+</div>
+{% endblock %}
