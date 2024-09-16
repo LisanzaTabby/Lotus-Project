@@ -53,19 +53,11 @@
             <td>{{student.secondary_school}}</td>
             <td>{{student.tertiary_school}}</td>
             <td>{{student.class_level}}</td>
-            {% if is_dataentry %}
             <td>
-                <a href=""class="btn btn-primary">Edit</a>
-                <a href=""class="btn btn-danger">Delete</a>
+                <a href="{% url 'edit_student' student.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete_student' student.id %}" class="btn btn-danger">Delete</a>
                 
-            </td>
-            {% elif is_finance %}
-            <td>
-               <a href=""class="btn btn-primary">Add Fee Payments</a>
-
-            </td>
-            {% endif %}
-            
+            </td>            
           </tr>
         </tbody>
         {% endfor %}

@@ -43,8 +43,8 @@
             <td>{{school.level}}</td>
             <td>{{school.location}}</td>
             <td>
-                <a href=""class="btn btn-primary">Edit</a>
-                <a href=""class="btn btn-danger">Delete</a>
+                <a href="{% url 'edit_school' school.id %}"class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete_school' school.id %}"class="btn btn-danger">Delete</a>
                 
             </td>
           </tr>

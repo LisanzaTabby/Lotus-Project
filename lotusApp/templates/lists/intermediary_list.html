@@ -48,8 +48,8 @@
         <td>{{intermediary.location}}</td>
         <td>{{intermediary.date_added}}</td>
         <td>
-            <a href="" class="btn btn-primary">Edit</a>
-            <a href="" class="btn btn-danger">Delete</a>
+            <a href="{% url 'edit_intermediary' intermediary.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_intermediary' intermediary.id %}" class="btn btn-danger">Delete</a>
             
         </td>
       </tr>

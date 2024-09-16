@@ -150,5 +150,28 @@ class StudentDonorHistory(models.Model):
 
     def __str__(self):
         return f'{self.student.studentName}, {self.donor.username}, {self.year}'
+    
+class Employee(models.Model):
+    GENDER = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    )
+    DEPARTMENT = (
+        ('Research', 'Research'),
+        ('Finance', 'Finance'),
+        ('HR', 'HR'),
+        ('IT', 'IT'),
+        ('Data-entry', 'Data-entry'), 
+    )
+    user = models.OneToOneField(User, blank=True, on_delete=models.CASCADE, null=True)
+    employeeName = models.CharField(max_length=100)
+    employeeEmail = models.EmailField(max_length=100, unique=True)
+    employeePhone = models.CharField(max_length=10, unique=True)
+    gender = models.CharField(max_length=10, choices=GENDER)
+    department = models.CharField(max_length=10, choices=DEPARTMENT)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.employeeName}'
 
 

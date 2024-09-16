@@ -22,3 +22,8 @@ class DonorForm(ModelForm):
         model = Donor
         fields = '__all__'
         exclude = ['date_added']
+class EmployeeForm(ModelForm):
+    class Meta:
+        model = Employee
+        fields = '__all__'
+        exclude = ['date_joined']

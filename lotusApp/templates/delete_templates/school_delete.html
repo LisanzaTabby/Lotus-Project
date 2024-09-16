@@ -1,0 +1,24 @@
+{%  extends 'navbars/dataentryactions.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+
+			<p>Are you sure you want to delete school ID <b>"{{school.id}}"</b> <h2 style="color: red;">{{ school.schoolName}}</h2>?</p>
+
+			<form action="{% url 'delete_school' school.id  %}" method="POST">
+				
+				{% csrf_token %}
+				<a class="btn btn-info" href="{% url 'school_list' %}">Cancel</a>
+
+				<input class="btn btn-danger" type="submit" name="Confirm">
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

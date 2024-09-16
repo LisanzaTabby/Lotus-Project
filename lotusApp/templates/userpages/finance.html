@@ -1,0 +1,57 @@
+{% extends 'navbars/financenavbar.html' %}
+{% block content %}
+<style>
+    .container1{
+        margin: 20px;
+    }
+    .container1 h2{
+        color: rgb(1, 153, 138);
+        font-weight: 700;
+        margin:20px;
+        text-align: center;
+    }
+    .container2{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 20px;
+        background: aqua;
+        border-radius: 10px;
+    }
+    .container2 .stats{
+        padding: 20px;
+        background: white;
+        color: rgb(236, 59, 89);
+        text-transform: uppercase;
+        font-weight: 700;
+        text-align: center;
+        border-radius: 5px;
+    }
+</style>
+<div class="container1">
+    <h2>Lotus Education Program Finance Data Statistics</h2>
+    <div class="container2">
+        <div class="stats">
+            <p>donors</p>
+            <p>{{ donor_count }}</p>
+        </div>
+        <div class="stats">
+            <p>students</p>
+            <p>{{ student_count }}</p>
+        </div>
+        <div class="stats">
+            <p>Total Donor Commitments</p>
+            <p>{{ total_committed }}</p>
+        </div>
+        <div class="stats">
+            <p>Total Donor Contributions</p>
+            <p>{{ total_contributed }}</p>
+        </div>
+        
+        <div class="stats">
+            <p>Employees</p>
+            <p>{{ employee_count }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
