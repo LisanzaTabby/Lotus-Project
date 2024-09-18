@@ -4,7 +4,9 @@
 {% if is_finance %}
 {% include 'navbars/financenavbar.html' %}
 {% endif %}
-
+{% if is_donor %}
+{% include 'navbars/donor_navbar.html' %}
+{% endif %}
 {% block content %}
 <style>
     #message{
@@ -61,7 +63,7 @@
             {% if is_dataentry %}
             <td>
                 <a href="{% url 'edit_student' student.id %}"class="btn btn-primary">Edit</a>
-                <a href="{% url 'deletestudent' student.id %}"class="btn btn-danger">Delete</a>
+                <a href="{% url 'delete_student' student.id %}"class="btn btn-danger">Delete</a>
                 
             </td>
             {% elif is_finance %}

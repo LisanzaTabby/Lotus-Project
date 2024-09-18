@@ -36,15 +36,23 @@ def user_login(request):
 def student_profile_view(request, pk):
     student = get_object_or_404(Student, id=pk)
     donor_history = StudentDonorHistory.objects.filter(student=student).order_by('-year')
-    is_dataentry = request.user.groups.filter(name='Dataentry')
-    is_finance = request.user.groups.filter(name='Finance')
-    is_donor = request.user.groups.filter(name='Donor')
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     context = {'student': student,'donor_history':donor_history, 'is_dataentry':is_dataentry,'is_finance':is_finance, 'is_donor':is_donor}
     return render(request, 'profiles/student_profile.html', context)
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def dataentry_view(request):
-    context = {}
+    students = Student.objects.all()
+    intermediaries = Intermediary.objects.all()
+    schools = School.objects.all()
+
+    students_count = students.count()
+    intermediaries_count = intermediaries.count()
+    schools_count = schools.count()
+    
+    context = {'students':students,'intermediaries':intermediaries,'schools':schools,'students_count':students_count,'intermediaries_count':intermediaries_count,'schools_count':schools_count}
     return render(request, 'userpages/dataentry.html', context)
 # dataentry actions
 @login_required
@@ -172,7 +180,10 @@ def delete_school(request,pk):
 @allowed_users(allowed_roles=['Dataentry','Finance'])
 def student_list(request):
     students = Student.objects.all().order_by('id')
-    return render(request, 'lists/student_list.html', {'students': students})
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
+    return render(request, 'lists/student_list.html', {'students': students,'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor})
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def intermediary_list(request):
