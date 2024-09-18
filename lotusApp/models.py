@@ -140,6 +140,22 @@ class Student(models.Model):
                     year = timezone.now().year,
                     changed_on = timezone.now().date()
                 )
+            if original_student.class_level != self.class_level:
+                AcademicProgress.objects.create(
+                    student = self,
+                    year = timezone.now().year,
+                    class_level = original_student.class_level,
+                    date_added = timezone.now().date()
+                )
+            else:
+                AcademicProgress.objects.create(
+                    student = self,
+                    year = timezone.now().year,
+                    class_level = self.class_level,
+                    date_added = timezone.now().date()
+                )
+
+
         super().save(*args, **kwargs)
 class StudentDonorHistory(models.Model):
     student = models.ForeignKey(Student, related_name='student_donor_history', on_delete=models.CASCADE, null=True, blank=True)
@@ -150,7 +166,15 @@ class StudentDonorHistory(models.Model):
 
     def __str__(self):
         return f'{self.student.studentName}, {self.donor.username}, {self.year}'
-    
+
+class AcademicProgress(models.Model):
+    student = models.ForeignKey(Student, related_name='academic_progress', on_delete=models.CASCADE, null=True, blank=True)
+    year = models.IntegerField(null=True, blank=True)
+    class_level = models.CharField(max_length=100, null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.student.studentName}, {self.class_level}'
 class Employee(models.Model):
     GENDER = (
         ('Male', 'Male'),
