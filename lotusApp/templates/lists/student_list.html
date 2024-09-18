@@ -1,4 +1,9 @@
+{% if is_dataentry %}
 {% include 'navbars/dataentryactions.html' %}
+{% endif %}
+{% if is_finance %}
+{% include 'navbars/financenavbar.html' %}
+{% endif %}
 
 {% block content %}
 <style>
@@ -42,7 +47,7 @@
         <tbody>
           <tr>
             <td>
-                <a href=""class="btn btn-primary">{{student.id}}</a>
+                <a href="{% url 'student_profile' student.id %}"class="btn btn-primary">{{student.id}}</a>
             </td>
             <td>{{student.studentName}}</td>
             <td>{{student.gender}}</td>
@@ -53,11 +58,19 @@
             <td>{{student.secondary_school}}</td>
             <td>{{student.tertiary_school}}</td>
             <td>{{student.class_level}}</td>
+            {% if is_dataentry %}
             <td>
-                <a href="{% url 'edit_student' student.id %}" class="btn btn-primary">Edit</a>
-                <a href="{% url 'delete_student' student.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'edit_student' student.id %}"class="btn btn-primary">Edit</a>
+                <a href="{% url 'deletestudent' student.id %}"class="btn btn-danger">Delete</a>
                 
-            </td>            
+            </td>
+            {% elif is_finance %}
+            <td>
+               <a href=""class="btn btn-primary">Add Fee Payments</a>
+
+            </td>
+            {% endif %}
+            
           </tr>
         </tbody>
         {% endfor %}
