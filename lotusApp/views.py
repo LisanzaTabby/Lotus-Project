@@ -35,11 +35,12 @@ def user_login(request):
 @login_required
 def student_profile_view(request, pk):
     student = get_object_or_404(Student, id=pk)
+    academicprogress = AcademicProgress.objects.filter(student=student).order_by('-year')
     donor_history = StudentDonorHistory.objects.filter(student=student).order_by('-year')
     is_dataentry = request.user.groups.filter(name='Dataentry').exists()
     is_finance = request.user.groups.filter(name='Finance').exists()
     is_donor = request.user.groups.filter(name='Donor').exists()
-    context = {'student': student,'donor_history':donor_history, 'is_dataentry':is_dataentry,'is_finance':is_finance, 'is_donor':is_donor}
+    context = {'student': student,'donor_history':donor_history, 'is_dataentry':is_dataentry,'is_finance':is_finance, 'is_donor':is_donor,'academicprogress':academicprogress}  
     return render(request, 'profiles/student_profile.html', context)
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
