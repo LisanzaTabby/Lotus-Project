@@ -94,32 +94,19 @@
             </tr>
         </thead>
         <tbody>
+            {% if academicprogress %}
             <tr>
-                <td>2023</td>
-                {% if academicprogress.year == 2023 %}
-                <td>{{ academicprogress.class_level }}</td>
-                {% else %}
-                <td> </td>
-                {% endif %}
+                {% for progress in academicprogress %}
+                <td>{{ progress.year }}</td>
+                <td>{{ progress.class_level }}</td>
                 {% if is_dataentry %}
                 <td>
-                    <a href="" class="btn btn-primary">Update</a>
+                    <a href="" class="btn btn-primary">Edit</a>
                 </td>
                 {% endif %}
+                {% endfor %}
             </tr>
-            <tr>
-                <td>2024</td>
-                {% if academicprogress.year == 2024 %}
-                <td>{{ academicprogress.class_level }}</td>
-                {% else %}
-                <td> </td>
-                {% endif %}
-                {% if is_dataentry %}
-                <td>
-                    <a href="" class="btn btn-primary">Update</a>
-                </td>
-                {% endif %}
-            </tr>
+            {% endif %}
         </tbody>
     </table>
 
