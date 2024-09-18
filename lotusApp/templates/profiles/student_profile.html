@@ -1,0 +1,208 @@
+{% if is_dataentry %}
+{% include 'navbars/dataentryactions.html' %}
+{% endif %}
+{% if is_finance %}
+{% include 'navbars/financenavbar.html' %}
+{% endif %}
+{% if is_donor %}
+{% include 'navbars/donor_navbar.html' %}
+{% endif %}
+{% block content %}
+<style>
+    .main {
+        margin: 30px;
+        padding: 25px;
+        background: aqua;
+        border-radius: 10px;
+        font-weight: 600;
+        text-align: center;
+    }
+    .profilepic {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+    .progress {
+        padding: 40px;
+        background-color: aqua;
+    }
+</style>
+
+<div class="main">
+    <img class="profilepic" style="align-items: center;" src="{{ student.profilePic.url }}" alt="studentProfilePhoto">
+    <p>Student Name: {{ student.studentName }}</p>
+    <p>Gender: {{ student.gender }}</p>
+    <p>Donor: {{ student.donor }}</p>
+    <p>Intermediary: {{ student.intermediary }}</p>
+    <p>Position: {{ student.position }}</p>
+    <p>Status: {{ student.status }}</p>
+    <p>Primary School: {{ student.primary_school }}</p>
+    <p>Secondary School: {{ student.secondary_school }}</p>
+    <p>Tertiary School: {{ student.tertiary_school }}</p>
+    <p>Class Level: {{ student.class_level }}</p>
+    <p>Date of Birth: {{ student.dateofbirth }}</p>
+    <p>Background Information: {{ student.backgroundInfo }}</p>
+
+    <h3>Student Donor History</h3>
+    <table style="margin-top: 20px;" class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Year</th>
+                <th scope="col">Donor</th>
+                <th scope="col">School Level</th>
+                <th scope="col">Changed on</th>
+                {% if is_dataentry %}
+                <th>Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        {% if donor_history %}
+        <tbody>
+            {% for history in donor_history %}
+            <tr>
+                <td>{{ history.year }}</td>
+                <td>{{ history.donor.username }}</td>
+                <td>{{ history.school_level }}</td>
+                <td>{{ history.changed_on }}</td>
+                {% if is_dataentry %}
+                <td>
+                    <a href="" class="btn btn-primary">Edit</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tr>
+            <td colspan="5">No Donor History Found</td>
+        </tr>
+        {% endif %}
+    </table>
+    {% if is_dataentry %}
+    <a href="{ url 'edit_student' student.id }" class="btn btn-primary">Change Donor</a>
+    {%  endif %}
+    <h3>Academic Progress</h3>
+    <table style="margin-top: 20px;" class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Academic Year</th>
+                <th scope="col">Progress</th>
+                {% if is_dataentry %}
+                <th>Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2023</td>
+                {% if academicprogress.year == 2023 %}
+                <td>{{ academicprogress.class_level }}</td>
+                {% else %}
+                <td> </td>
+                {% endif %}
+                {% if is_dataentry %}
+                <td>
+                    <a href="" class="btn btn-primary">Update</a>
+                </td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td>2024</td>
+                {% if academicprogress.year == 2024 %}
+                <td>{{ academicprogress.class_level }}</td>
+                {% else %}
+                <td> </td>
+                {% endif %}
+                {% if is_dataentry %}
+                <td>
+                    <a href="" class="btn btn-primary">Update</a>
+                </td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Exam Results</h3>
+    <table style="margin-top: 20px;" class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Exam</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Score</th>
+                <th scope="col">Grade</th>
+                {% if is_dataentry %}
+                <th>Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        {% if examresults %}
+        <tbody>
+            {% for result in examresults %}
+            <tr>
+                <td>{{ result.exam.exam_name }}</td>
+                <td>{{ result.subject }}</td>
+                <td>{{ result.score }}</td>
+                <td>{{ result.grade }}</td>
+                {% if is_dataentry %}
+                <td>
+                    <a href="" class="btn btn-primary">Edit</a>
+                    <a href="" class="btn btn-danger">Delete</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tr>
+            <td colspan="5">No Exam results Found</td>
+        </tr>
+        {% endif %}
+    </table>
+    {% if is_dataentry %}
+       <a href="" class="btn btn-primary">Add Results</a>        
+    {% endif %}
+
+    <h3>Fees Payments</h3>
+    <table style="margin-top: 20px;" class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">PaymentID</th>
+                <th scope="col">School Name</th>
+                <th scope="col">School Year</th>
+                <th scope="col">Amounts</th>
+                {% if is_finance %}
+                <th>Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        {% if fees_payments %}
+        <tbody>
+            {% for payment in fees_payments %}
+            <tr>
+                <td>{{ payment.id }}</td>
+                <td>{{ payment.school_name }}</td>
+                <td>{{ payment.school_year }}</td>
+                <td>{{ payment.amount }}</td>
+                {% if is_finance %}
+                <td>
+                    <a href="" class="btn btn-primary">Edit</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tr>
+            <td colspan="5">No Fees Payments Found</td>
+        </tr>
+        {% endif %}
+    </table>
+    
+    
+    <p>Date added: {{ student.date_added }}</p>
+
+    <a href="" class="btn btn-primary">Print Student Profile</a>
+
+</div>
+{% endblock %}
