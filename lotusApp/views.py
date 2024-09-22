@@ -295,7 +295,9 @@ def delete_employee(request,pk):
 @login_required
 @allowed_users(allowed_roles=['Donor'])
 def donor_view(request):
-    context = {}
+    students = Student.objects.filter(donor=request.user)
+    student_count = students.count()
+    context = {'students':students, 'student_count':student_count}
     return render(request, 'userpages/donor.html', context)
 @login_required
 @allowed_users(allowed_roles=['Donor'])
