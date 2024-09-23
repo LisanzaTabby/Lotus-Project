@@ -199,7 +199,16 @@ def school_list(request):
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def finance_view(request):
-    context = {}
+    students = Student.objects.all()
+    student_count = students.count()
+
+    donors = Donor.objects.all()
+    donor_count = donors.count()
+
+    employees = Employee.objects.all()
+    employee_count = employees.count()
+
+    context = {'students':students,'student_count':student_count,'donors':donors,'donor_count':donor_count,'employees':employees,'employee_count':employee_count}   
     return render(request, 'userpages/finance.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])
@@ -262,8 +271,8 @@ def add_employee(request):
             messages.success(request, 'Employee Added Successfully!')
             return redirect('employee_list')
         else:
-            messages.error(request, form.errorse)
-            return render(request, 'add_templates/add_donor.html', {'form':form})
+            messages.error(request, form.errors)
+            return render(request, 'lists/employee_list.html', {'form':form})
     form = EmployeeForm()
     return render(request, 'add_templates/add_employee.html', {'form':form})
 @login_required
