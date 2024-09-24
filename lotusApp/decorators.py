@@ -4,7 +4,18 @@ from django.shortcuts import redirect
 def unauthenticated_user(view_func):
     def wrapper(request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('dataentry')
+            is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+            is_finance = request.user.groups.filter(name='Finance').exists()
+            is_donor = request.user.groups.filter(name='Donor').exists()
+            if is_dataentry:
+                return redirect('dataentry')
+            elif is_finance:
+                return redirect('finance')
+            elif is_donor:
+                return redirect('donor')
+            else:
+                return HttpResponse('You are not an Authorized user! Please Contact the Admin Support')
+
         else:
             return view_func(request, *args, **kwargs)
     return wrapper

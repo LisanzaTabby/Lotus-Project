@@ -29,8 +29,7 @@
     }
 </style>
 
-<form method= 'post'class="d-flex" role="search">
-    {% csrf_token %}
+<form method= 'get'class="d-flex" role="search">
     {{ myFilter.form.as_p }}
     <button class="btn btn-primary" type="submit">Search</button>
   </form>
