@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .decorators import unauthenticated_user, allowed_users
+from .filters import *
 
 # Create your views here.
 def index(request):
@@ -14,7 +15,6 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.groups.filter(name='Dataentry').exists():
@@ -31,7 +31,8 @@ def user_login(request):
         else:
             messages.error(request, 'Invalid Credentials, try Again')
             return render(request, 'login.html')
-    return render(request, 'login.html')
+    context = {'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor} 
+    return render(request, 'login.html', context)
 @login_required
 def student_profile_view(request, pk):
     student = get_object_or_404(Student, id=pk)
@@ -181,20 +182,27 @@ def delete_school(request,pk):
 @allowed_users(allowed_roles=['Dataentry','Finance'])
 def student_list(request):
     students = Student.objects.all().order_by('id')
+    myFilter = StudentFilter(request.POST, queryset=students)
+    students = myFilter.qs
     is_dataentry = request.user.groups.filter(name='Dataentry').exists()
     is_finance = request.user.groups.filter(name='Finance').exists()
     is_donor = request.user.groups.filter(name='Donor').exists()
-    return render(request, 'lists/student_list.html', {'students': students,'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor})
+    return render(request, 'lists/student_list.html', {'students': students,'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor, 'myFilter':myFilter})
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def intermediary_list(request):
     intermediaries = Intermediary.objects.all().order_by('id')
-    return render(request, 'lists/intermediary_list.html', {'intermediaries': intermediaries})
+    myFilter = IntermediaryFilter(request.POST, queryset = intermediaries)
+    intermediaries = myFilter.qs
+    return render(request, 'lists/intermediary_list.html', {'intermediaries': intermediaries,'myFilter':myFilter})
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def school_list(request):
     schools = School.objects.all().order_by('id')
-    return render(request, 'lists/school_list.html', {'schools': schools})
+    myFilter = SchoolFilter(request.POST, queryset=schools)
+    schools = myFilter.qs
+    return render(request, 'lists/school_list.html', {'schools': schools, 'myFilter':myFilter})
+
 # Finance views
 @login_required
 @allowed_users(allowed_roles=['Finance'])
@@ -214,7 +222,9 @@ def finance_view(request):
 @allowed_users(allowed_roles=['Finance'])
 def donor_list(request):
     donors = Donor.objects.all().order_by('id')
-    context = {'donors':donors}
+    myFilter = DonorFilter(request.GET, queryset=donors)
+    donors = myFilter.qs
+    context = {'donors':donors,'myFilter':myFilter}
     return render(request, 'lists/donor_list.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])
@@ -259,7 +269,9 @@ def delete_donor(request, pk):
 @allowed_users(allowed_roles=['Finance'])
 def employee_list(request):
     employees = Employee.objects.all().order_by('id')
-    context={'employees':employees}
+    myFilter = EmployeeFilter(request.GET, queryset=employees)
+    employees = myFilter.qs
+    context={'employees':employees,'myFilter':myFilter}
     return render(request, 'lists/employee_list.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])
@@ -312,7 +324,9 @@ def donor_view(request):
 @allowed_users(allowed_roles=['Donor'])
 def donor_specific_students(request):
     students = Student.objects.filter(donor=request.user)
-    context = {'students':students}
+    myFilter = StudentFilter(request.GET, queryset=students)
+    students = myFilter.qs
+    context = {'students':students, 'myFilter':myFilter}
     return render (request, 'lists/donor_specific_students.html', context)
 def logout_view(request):
     logout(request)
