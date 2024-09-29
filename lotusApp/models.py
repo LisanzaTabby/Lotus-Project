@@ -175,6 +175,34 @@ class AcademicProgress(models.Model):
 
     def __str__(self):
         return f'{self.student.studentName}, {self.class_level}'
+
+class FeeCommitment(models.Model):
+    donor = models.ForeignKey(User, related_name='donor_fee_commitment', on_delete=models.CASCADE, null=True, blank=True)
+    fee_amount = models.IntegerField(null=True, blank=True)
+    year = models.IntegerField(null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.donor.username}'
+class Exam(models.Model):
+    LEVEL = (
+        ('Term1', 'Term1'),
+        ('Term2', 'Term2'),
+        ('Term3', 'Term3'),
+    )
+    term = models.CharField(max_length=5, choices=LEVEL,null=True, blank=True)
+    def __str__(self):
+        return f'{self.term}'
+class ExamResults(models.Model):
+    student = models.ForeignKey(Student, related_name='student_exam_results', on_delete=models.CASCADE, null=True, blank=True)
+    term = models.ForeignKey(Exam, related_name='term_exam_results',on_delete=models.CASCADE,null=True, blank=True)
+    subject = models.CharField(max_length=100, null=True, blank=True)
+    score = models.IntegerField(null=True, blank=True)
+    mean_grade = models.CharField(max_length=10, null=True, blank=True)
+    date_added = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.student.studentName},{self.subject}, {self.score}'
 class Employee(models.Model):
     GENDER = (
         ('Male', 'Male'),
