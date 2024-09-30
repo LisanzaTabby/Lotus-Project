@@ -147,7 +147,7 @@
         {% endif %}
     </table>
     {% if is_dataentry %}
-       <a href="" class="btn btn-primary">Add Results</a>        
+       <a href="{% url 'add_student_results' student.id %}" class="btn btn-primary">Add Results</a>        
     {% endif %}
 
     <h3>Fees Payments</h3>

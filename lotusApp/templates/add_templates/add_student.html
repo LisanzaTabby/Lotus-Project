@@ -15,78 +15,73 @@
         flex-direction: column;
         font-size: 1em;
     }
-    .main form{
-        font-weight: 600;        
-    }
-    .mb-4{
-        margin: 10px;
-    }
+    
 </style>
 <h2>Add Student Form</h2>
 <div class="main">
     <form method="post"enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="mb-4">
+        <div class="form-group">
             {{form.studentName.label_tag}}
             {{form.studentName}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.gender.label_tag}}
             {{form.gender}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.dateofbirth.label_tag}}
             {{form.dateofbirth}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.modeofstudy.label_tag}}
             {{form.modeofstudy}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.phone.label_tag}}
             {{form.phone}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.intermediary.label_tag}}
             {{form.intermediary}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.donor.label_tag}}
             {{form.donor}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.level.label_tag}}
             {{form.level}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.primary_school.label_tag}}
             {{form.primary_school}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.secondary_school.label_tag}}
             {{form.secondary_school}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.tertiary_school.label_tag}}
             {{form.tertiary_school}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.class_level.label_tag}}
             {{form.class_level}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.position.label_tag}}
             {{form.position}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.status.label_tag}}
             {{form.status}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.backgroundInfo.label_tag}}
             {{form.backgroundInfo}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.profilePic.label_tag}}
             {{form.profilePic}}
         </div>        
