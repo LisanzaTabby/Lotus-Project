@@ -22,11 +22,12 @@
     <form method="post"enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-            {{ termform.term}}            
+            {{ termform.term.label_tag }}
+            {{ termform.term }}            
         </div>
         {{ formset.management_form }}
         
-        {% for form in ReaultsForm %}
+        {% for form in ResultsForm %}
             <div class="form-group">
                 {{ form.subject.label_tag }}
                 {{ form.subject }}
