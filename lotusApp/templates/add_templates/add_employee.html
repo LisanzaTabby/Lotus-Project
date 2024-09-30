@@ -26,23 +26,23 @@
 <div class="main">
     <form method="post"enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="mb-4">
+        <div class="form-group">
             {{form.employeeName.label_tag}}
             {{form.employeeName}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.employeeEmail.label_tag}}
             {{form.employeeEmail}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.employeePhone.label_tag}}
             {{form.employeePhone}}
         </div>
-        <div class="mb-4">
+        <div class="form-group">
             {{form.gender.label_tag}}
             {{form.gender}}
         </div>        
-        <div class="mb-4">
+        <div class="form-group">
             {{form.department.label_tag}}
             {{form.department}}
         </div>        

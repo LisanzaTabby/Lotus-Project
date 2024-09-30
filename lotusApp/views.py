@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.forms import inlineformset_factory
 from .forms import *
 from .decorators import unauthenticated_user, allowed_users
 from .filters import *
@@ -30,9 +31,8 @@ def user_login(request):
                 return HttpResponse('You are not an Authorized User!')
         else:
             messages.error(request, 'Invalid Credentials, try Again')
-            return render(request, 'login.html')
-    context = {'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor} 
-    return render(request, 'login.html', context)
+            return render(request, 'login.html') 
+    return render(request, 'login.html')
 @login_required
 def student_profile_view(request, pk):
     student = get_object_or_404(Student, id=pk)
@@ -72,6 +72,36 @@ def add_student(request):
 
     form = StudentForm()
     return render(request, 'add_templates/add_student.html', {'form': form})
+@login_required
+@allowed_users(allowed_roles=['Dataentry'])
+def add_student_results(request,pk):
+    student = get_object_or_404(Student, id=pk)
+    termFormSet = inlineformset_factory(Student, ExamResults, form=ExamForm, fields=('term'), extra=1)
+    ResultsFormSet = inlineformset_factory(Student, ExamResults, form=ExamForm, fields=('subject','score','mean_grade'), extra=5)
+    termform= termFormSet(request.POST or None)
+    ResultsForm = ResultsFormSet(queryset=ExamResults.objects.none(), instance=student)
+    if request.method == 'POST':
+        termform = termform(request.POST)
+        ResultsForm = ResultsForm(request.POST, instance=student)
+        if termform.is_valid() and ResultsForm.is_valid():
+             terminstance = termform.save()
+             for form in ResultsForm:
+                 result = form.save(commit=False)
+                 result.term = terminstance.term
+                 result.save()
+        messages.success(request, 'Results and term added successfully')
+        return redirect('student_profile_view', pk=pk)
+    else:
+        messages.error(request, 'There was an error with your submission.')
+        for form in ResultsForm:
+            for field in form.errors:
+                messages.error(request, f"{field}: {form.errors[field]}")
+    context = {
+        'termform': termform,
+        'ResultsForm': ResultsForm,
+    }
+    
+    return render(request, 'add_templates/add_student_results.html', context)
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def add_intermediary(request):
