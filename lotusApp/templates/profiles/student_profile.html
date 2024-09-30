@@ -28,7 +28,9 @@
         background-color: aqua;
     }
 </style>
-
+{% for message in messages %}
+<p id="message">{{message}}</p>
+{% endfor %}
 <div class="main">
     <img class="profilepic" style="align-items: center;" src="{{ student.profilePic.url }}" alt="studentProfilePhoto">
     <p>Student Name: {{ student.studentName }}</p>

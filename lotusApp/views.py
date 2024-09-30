@@ -76,13 +76,12 @@ def add_student(request):
 @allowed_users(allowed_roles=['Dataentry'])
 def add_student_results(request,pk):
     student = get_object_or_404(Student, id=pk)
-    termFormSet = inlineformset_factory(Student, ExamResults, form=ExamForm, fields=('term'), extra=1)
     ResultsFormSet = inlineformset_factory(Student, ExamResults, form=ExamForm, fields=('subject','score','mean_grade'), extra=5)
-    termform= termFormSet(request.POST or None)
+    termform= ExamForm(request.POST or None)
     ResultsForm = ResultsFormSet(queryset=ExamResults.objects.none(), instance=student)
     if request.method == 'POST':
-        termform = termform(request.POST)
-        ResultsForm = ResultsForm(request.POST, instance=student)
+        termform = ExamForm(request.POST)
+        ResultsForm = ResultsFormSet(request.POST, instance=student)
         if termform.is_valid() and ResultsForm.is_valid():
              terminstance = termform.save()
              for form in ResultsForm:
@@ -90,7 +89,7 @@ def add_student_results(request,pk):
                  result.term = terminstance.term
                  result.save()
         messages.success(request, 'Results and term added successfully')
-        return redirect('student_profile_view', pk=pk)
+        return redirect('student_profile', pk=pk)
     else:
         messages.error(request, 'There was an error with your submission.')
         for form in ResultsForm:
