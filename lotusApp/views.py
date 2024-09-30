@@ -76,7 +76,6 @@ def add_student(request):
 @allowed_users(allowed_roles=['Dataentry'])
 def add_student_results(request,pk):
     student = get_object_or_404(Student, id=pk)
-    termFormSet = inlineformset_factory(Student, ExamResults, form=ExamForm, fields=('term',), extra=1)
     ResultsFormSet = inlineformset_factory(Student, ExamResults, form=ExamForm, fields=('subject','score','mean_grade'), extra=5)
     termform= ExamForm(request.POST or None)
     ResultsForm = ResultsFormSet(queryset=ExamResults.objects.none(), instance=student)
