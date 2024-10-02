@@ -197,7 +197,7 @@ class ExamResults(models.Model):
     student = models.ForeignKey(Student, related_name='student_exam_results', on_delete=models.CASCADE, null=True, blank=True)
     term = models.ForeignKey(Exam, related_name='term_exam_results',on_delete=models.CASCADE,null=True, blank=True)
     subject = models.CharField(max_length=100, null=True, blank=True)
-    score = models.IntegerField(null=True, blank=True)
+    score = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     mean_grade = models.CharField(max_length=10, null=True, blank=True)
     date_added = models.DateField(auto_now_add=True)
 
