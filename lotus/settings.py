@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lotusApp',
-    'django_crispy_forms',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
