@@ -41,8 +41,6 @@
             <th>Actions</th>
           </tr>
         </thead>
-        {% if students %}
-
         {% for student in students %}
         <tbody>
           <tr>
@@ -72,15 +70,12 @@
             {% endif %}
             
           </tr>
-        </tbody>
-        {% endfor %}
-        {% else %}
-        <tbody>
+        {% empty %}
           <tr>
             <td colspan="10">No students found</td>
           </tr>
         </tbody>
-        {% endif %}
+        {% endfor %}
       </table>
     <a href="{% url 'forgot_password' %}" class="btn btn-primary">Print Students</a>
 
