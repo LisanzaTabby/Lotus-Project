@@ -33,9 +33,7 @@
         <th>Actions</th>
       </tr>
     </thead>
-    {% if donors %}
-
-    {% for donor in donors %}
+   {% for donor in donors %}
     <tbody>
       <tr>
         <td>{{donor.id}}</td>
@@ -49,15 +47,12 @@
             
         </td>
       </tr>
-    {% endfor %}
-    </tbody>
-    {% else %}
-    <tbody>
+    {% empty %}
       <tr>
         <td colspan="6">No Donors found</td>
       </tr>
     </tbody>
-    {% endif %}
+    {% endfor %}
   </table>
   <a href="" class="btn btn-primary">Print Donor List</a>
   

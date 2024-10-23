@@ -31,8 +31,6 @@
             <th>Actions</th>
           </tr>
         </thead>
-        {% if schools %}
-
         {% for school in schools %}
         <tbody>
           <tr>
@@ -48,15 +46,12 @@
                 
             </td>
           </tr>
-        </tbody>
-        {% endfor %}
-        {% else %}
-        <tbody>
+        {% empty %}
           <tr>
             <td colspan="10">No schools found</td>
           </tr>
         </tbody>
-        {% endif %}
+        {% endfor %}
       </table>
 </div>
 {% endblock %}

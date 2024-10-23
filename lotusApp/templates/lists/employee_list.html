@@ -35,8 +35,6 @@
         <th>Actions</th>
       </tr>
     </thead>
-    {% if employees %}
-
     {% for employee in employees %}
     <tbody>
       <tr>
@@ -53,15 +51,12 @@
             
         </td>
       </tr>
-    </tbody>
-    {% endfor %}
-    {% else %}
-    <tbody>
+    {% empty %}
       <tr>
         <td colspan="6">No intermediaries found</td>
       </tr>
     </tbody>
-    {% endif %}
+    {% endfor %}
   </table>
   <a href="" class="btn btn-primary">Print Employee List</a>
 

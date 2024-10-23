@@ -34,8 +34,6 @@
         <th>Actions</th>
       </tr>
     </thead>
-    {% if fees %}
-
     {% for fee in fees %}
     <tbody>
       <tr>
@@ -50,15 +48,13 @@
             <a href="{% url 'delete_donor_commitment' fee.id %}" class="btn btn-danger">Delete</a>            
         </td>
       </tr>
-    {% endfor %}
-    </tbody>
-    {% else %}
-    <tbody>
+    {% empty %}
       <tr>
         <td colspan="6">No Commitments found</td>
       </tr>
+    {% endfor %}
+
     </tbody>
-    {% endif %}
   </table>
   <a href="{% url 'add_fee_commitment' %}" class="btn btn-primary">Add Fee Commitment</a>
 
