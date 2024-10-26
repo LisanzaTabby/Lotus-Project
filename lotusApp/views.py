@@ -352,7 +352,7 @@ def donor_view(request):
 @login_required
 @allowed_users(allowed_roles=['Donor'])
 def donor_specific_students(request):
-    students = Student.objects.filter(donor=request.user)
+    students = Student.objects.select_related('donor').filter(donor=request.user)
     myFilter = StudentFilter(request.GET, queryset=students)
     students = myFilter.qs
     context = {'students':students, 'myFilter':myFilter}
