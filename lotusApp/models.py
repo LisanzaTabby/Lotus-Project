@@ -117,6 +117,7 @@ class Student(models.Model):
     secondary_school = models.ForeignKey(School, related_name='secondary_students', on_delete=models.CASCADE, null=True, blank=True)
     tertiary_school = models.ForeignKey(School, related_name='tertiary_students', on_delete=models.CASCADE, null=True, blank=True)
     profilePic = models.ImageField(upload_to='profile_pics', blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):  
@@ -162,7 +163,7 @@ class StudentDonorHistory(models.Model):
     donor = models.ForeignKey(User, related_name='student_donor', on_delete=models.CASCADE, null=True, blank=True)
     school_level = models.CharField(max_length=100, null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
-    changed_on = models.DateTimeField(auto_now_add=True)
+    changed_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.student.studentName}, {self.donor.username}, {self.year}'
@@ -171,6 +172,7 @@ class AcademicProgress(models.Model):
     student = models.ForeignKey(Student, related_name='academic_progress', on_delete=models.CASCADE, null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
     class_level = models.CharField(max_length=100, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -180,6 +182,7 @@ class FeeCommitment(models.Model):
     donor = models.ForeignKey(User, related_name='donor_fee_commitment', on_delete=models.CASCADE, null=True, blank=True)
     fee_amount = models.IntegerField(null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -199,6 +202,7 @@ class ExamResults(models.Model):
     subject = models.CharField(max_length=100, null=True, blank=True)
     score = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     mean_grade = models.CharField(max_length=10, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
     date_added = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -221,6 +225,7 @@ class Employee(models.Model):
     employeePhone = models.CharField(max_length=10, unique=True)
     gender = models.CharField(max_length=10, choices=GENDER)
     department = models.CharField(max_length=10, choices=DEPARTMENT)
+    updated_at = models.DateTimeField(auto_now=True)
     date_joined = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

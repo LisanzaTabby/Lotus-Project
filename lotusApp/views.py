@@ -210,7 +210,7 @@ def delete_school(request,pk):
 @login_required
 @allowed_users(allowed_roles=['Dataentry','Finance'])
 def student_list(request):
-    students = Student.objects.select_related(primary_school, secondary_school, tertiary_school,intermediary,donor).all().order_by('id')
+    students = Student.objects.select_related('primary_school', 'secondary_school', 'tertiary_school').all().order_by('id')
     myFilter = StudentFilter(request.POST, queryset=students)
     students = myFilter.qs
     is_dataentry = request.user.groups.filter(name='Dataentry').exists()
