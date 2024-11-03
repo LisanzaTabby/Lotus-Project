@@ -13,7 +13,7 @@
 			<form action="{% url 'delete_donor' donor.id  %}" method="POST">
 				
 				{% csrf_token %}
-				<a class="btn btn-info" href="{% url 'donor_list' %}">Cancel</a>
+				<a class="btn btn-info" href="{{request.META.HTTP_REFERER}}">Cancel</a>
 
 				<input class="btn btn-danger" type="submit" name="Confirm">
 			</form>
