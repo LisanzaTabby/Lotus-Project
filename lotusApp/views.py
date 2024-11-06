@@ -236,7 +236,7 @@ def school_list(request):
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def finance_view(request):
-    students = Student.objects.select_related(donor, imtermediary, primary_school, secondary_school, tertiary_school).all()
+    students = Student.objects.all()
     student_count = students.count()
 
     donors = Donor.objects.all()
