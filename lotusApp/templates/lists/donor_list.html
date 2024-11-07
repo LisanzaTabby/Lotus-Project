@@ -21,7 +21,7 @@
 <p id="message">{{message}}</p>
 {% endfor %}
 <div class="all">
-  <a href="{% url 'student_list' %}"class="btn btn-primary">All Students</a>
+  <a href="{% url 'donor_list' %}"class="btn btn-primary">All Donors</a>
 </div>
 <form method= 'get' action="{% url 'donor_list' %}"class="d-flex" role="search">
   <input type="text"name='q'placeholder="Search school...">

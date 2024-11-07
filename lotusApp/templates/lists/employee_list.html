@@ -12,15 +12,19 @@
         text-transform: uppercase;
         padding: 10px;
     }
+    .all{
+      margin: 20px;
+    }
 </style>
 <h2>Employee list page</h2>
 {% for message in messages %}
 <p id="message">{{message}}</p>
 {% endfor %}
-<form class="d-flex" role="search"method="post">
-  {% csrf_token %}
-  {{ myFilter.form.as_p}}
-  <button class="btn btn-primary" type="submit">Search</button>
+<div class="all">
+  <a href="{% url 'employee_list' %}"class="btn btn-primary">All Employees</a>
+</div>
+<form method= 'get' action="{% url 'employee_list' %}"class="d-flex" role="search">
+  <input type="text"name='q'placeholder="Search school...">
 </form>
 <table style="margin-top: 20px;" class="table table-bordered">
     <thead>
