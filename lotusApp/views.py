@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
 from .forms import *
 from .decorators import unauthenticated_user, allowed_users
+from django.db.models import Q
 from .filters import *
 
 # Create your views here.
@@ -210,13 +211,21 @@ def delete_school(request,pk):
 @login_required
 @allowed_users(allowed_roles=['Dataentry','Finance'])
 def student_list(request):
-    students = Student.objects.select_related('primary_school', 'secondary_school', 'tertiary_school').all().order_by('id')
-    myFilter = StudentFilter(request.POST, queryset=students)
-    students = myFilter.qs
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    students = Student.objects.filter(
+        Q(studentName__icontains=q)|
+        Q(intermediary__intermediaryName__icontains=q)|
+        Q(donor__username__icontains=q)|
+        Q(gender__icontains=q)|
+        Q(level__icontains=q)|
+        Q(class_level__icontains=q)
+    )
+    #myFilter = StudentFilter(request.POST, queryset=students)
+    #students = myFilter.qs
     is_dataentry = request.user.groups.filter(name='Dataentry').exists()
     is_finance = request.user.groups.filter(name='Finance').exists()
     is_donor = request.user.groups.filter(name='Donor').exists()
-    return render(request, 'lists/student_list.html', {'students': students,'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor, 'myFilter':myFilter})
+    return render(request, 'lists/student_list.html', {'students': students,'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor})
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def intermediary_list(request):
@@ -227,10 +236,13 @@ def intermediary_list(request):
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def school_list(request):
-    schools = School.objects.all().order_by('id')
-    myFilter = SchoolFilter(request.POST, queryset=schools)
-    schools = myFilter.qs
-    return render(request, 'lists/school_list.html', {'schools': schools, 'myFilter':myFilter})
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    schools = School.objects.filter(
+        Q(schoolName__icontains=q)|
+        Q(location__icontains=q)|
+        Q(level__icontains=q)
+    )
+    return render(request, 'lists/school_list.html', {'schools': schools})
 
 # Finance views
 @login_required
@@ -250,10 +262,13 @@ def finance_view(request):
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def donor_list(request):
-    donors = Donor.objects.all().order_by('id')
-    myFilter = DonorFilter(request.GET, queryset=donors)
-    donors = myFilter.qs
-    context = {'donors':donors,'myFilter':myFilter}
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    donors = Donor.objects.filter(
+        Q(donorName__icontains=q)|
+        Q(gender__icontains=q)
+    )
+    
+    context = {'donors':donors}
     return render(request, 'lists/donor_list.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])

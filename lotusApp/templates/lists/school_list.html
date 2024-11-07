@@ -8,16 +8,20 @@
         text-transform: uppercase;
         padding: 10px;
     }
+    .all{
+      margin: 20px;
+    }
 </style>
 <h2 style="text-align: center;">School List Page</h2>
 <div class="main">
     {% for message in messages %}
     <p id="message">{{message}}</p>
     {% endfor %}
-    <form method= 'post'class="d-flex" role="search">
-      {% csrf_token %}
-      {{ myFilter.form.as_p }}
-      <button class="btn btn-primary" type="submit">Search</button>
+    <div class="all">
+      <a href="{% url 'school_list' %}"class="btn btn-primary">All Schools</a>
+    </div>
+    <form method= 'get'class="d-flex" action="{% url 'school_list' %}"role="search">
+      <input type="text"name='q'placeholder="Search school...">
     </form>
     <table style="margin-top: 20px;" class="table table-bordered">
         <thead>
