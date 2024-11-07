@@ -219,9 +219,7 @@ def student_list(request):
         Q(gender__icontains=q)|
         Q(level__icontains=q)|
         Q(class_level__icontains=q)
-    )
-    #myFilter = StudentFilter(request.POST, queryset=students)
-    #students = myFilter.qs
+    ).order_by('id')
     is_dataentry = request.user.groups.filter(name='Dataentry').exists()
     is_finance = request.user.groups.filter(name='Finance').exists()
     is_donor = request.user.groups.filter(name='Donor').exists()
@@ -229,10 +227,12 @@ def student_list(request):
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def intermediary_list(request):
-    intermediaries = Intermediary.objects.all().order_by('id')
-    myFilter = IntermediaryFilter(request.POST, queryset = intermediaries)
-    intermediaries = myFilter.qs
-    return render(request, 'lists/intermediary_list.html', {'intermediaries': intermediaries,'myFilter':myFilter})
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    intermediaries = Intermediary.objects.filter(
+        Q(intermediaryName__icontains=q)|
+        Q(location__icontains=q)
+    ).order_by('id')
+    return render(request, 'lists/intermediary_list.html', {'intermediaries': intermediaries})
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def school_list(request):
@@ -241,7 +241,7 @@ def school_list(request):
         Q(schoolName__icontains=q)|
         Q(location__icontains=q)|
         Q(level__icontains=q)
-    )
+    ).order_by('id')
     return render(request, 'lists/school_list.html', {'schools': schools})
 
 # Finance views
@@ -266,7 +266,7 @@ def donor_list(request):
     donors = Donor.objects.filter(
         Q(donorName__icontains=q)|
         Q(gender__icontains=q)
-    )
+    ).order_by('id')
     
     context = {'donors':donors}
     return render(request, 'lists/donor_list.html', context)
@@ -312,10 +312,13 @@ def delete_donor(request, pk):
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def employee_list(request):
-    employees = Employee.objects.all().order_by('id')
-    myFilter = EmployeeFilter(request.GET, queryset=employees)
-    employees = myFilter.qs
-    context={'employees':employees,'myFilter':myFilter}
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    employees = Employee.objects.filter(
+        Q(employeeName__icontains=q)|
+        Q(gender__icontains=q)|
+        Q(department__icontains=q)
+    ).order_by('id')
+    context={'employees':employees}
     return render(request, 'lists/employee_list.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])
