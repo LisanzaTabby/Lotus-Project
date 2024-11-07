@@ -7,9 +7,8 @@ from django.forms import inlineformset_factory
 from .forms import *
 from .decorators import unauthenticated_user, allowed_users
 from django.db.models import Q
-from .filters import *
-
 # Create your views here.
+@unauthenticated_user
 def index(request):
     return render(request, 'index.html')
 @unauthenticated_user

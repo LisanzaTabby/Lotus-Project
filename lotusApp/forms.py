@@ -7,7 +7,6 @@ class StudentForm(ModelForm):
     class Meta:
         model = Student
         fields = '__all__'
-        exclude = ['date_added']
         widgets = {
             'studentName': forms.TextInput(attrs={'class': 'form-control'}),
             'dateofbirth':forms.DateInput(attrs={'type': 'date','class': 'form-control'}),
@@ -46,7 +45,6 @@ class intermediaryForm(ModelForm):
     class Meta:
         model = Intermediary
         fields = '__all__'
-        exclude = ['date_added']
         widgets = {
         'intermediaryName': forms.TextInput(attrs={'class': 'form-control'}),
         'intermediaryEmail': forms.EmailInput(attrs={'class': 'form-control'}),
@@ -66,7 +64,6 @@ class schoolForm(ModelForm):
     class Meta:
         model = School
         fields = '__all__'        
-        exclude = ['date_added'] 
         widgets = {
             'schoolName': forms.TextInput(attrs={'class': 'form-control'}),
             'schoolEmail': forms.EmailInput(attrs={'class': 'form-control'}),
@@ -87,7 +84,6 @@ class DonorForm(ModelForm):
     class Meta:
         model = Donor
         fields = '__all__'
-        exclude = ['date_added']
         widgets = {
             'donorName': forms.TextInput(attrs={'class': 'form-control'}),
             'donorEmail': forms.EmailInput(attrs={'class': 'form-control'}),
@@ -104,7 +100,6 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = '__all__'
-        exclude = ['date_joined']
         widgets = {
             'employeeName': forms.TextInput(attrs={'class': 'form-control'}),
             'employeeEmail': forms.EmailInput(attrs={'class': 'form-control'}),
@@ -123,7 +118,6 @@ class ExamResultForm(ModelForm):
     class Meta:
         model = ExamResults
         fields = '__all__'
-        exclude = ['date_added']
         widgets = {
             'student': forms.Select(attrs={'class': 'form-control'}),
             'term': forms.Select(attrs={'class': 'form-control'}),
