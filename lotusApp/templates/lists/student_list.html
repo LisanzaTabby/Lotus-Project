@@ -16,17 +16,21 @@
         text-transform: uppercase;
         padding: 10px;
     }
+    .all{
+      margin: 20px;
+    }
 </style>
 <h2 style="text-align: center;">Lotus Student Beneficiaries</h2>
 <div class="main">
     {% for message in messages %}
     <p id="message">{{message}}</p>
     {% endfor %}
-    <form method= 'post'class="d-flex" role="search">
-            {% csrf_token %}
-            {{ myFilter.form.as_p }}
-            <button class="btn btn-primary" type="submit">Search</button>
-          </form>
+    <div class="all">
+      <a href="{% url 'student_list' %}"class="btn btn-primary">All Students</a>
+    </div>
+    <form method= 'get'class="d-flex" action = "{% url 'student_list' %}"role="search">
+      <input type="text" name="q" placeholder="Search Students...">
+    </form>
     <table style="margin-top: 20px;" class="table table-bordered">
         <thead>
           <tr>
