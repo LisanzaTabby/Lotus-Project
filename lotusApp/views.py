@@ -10,6 +10,7 @@ from django.db.models import Q
 # Create your views here.
 @unauthenticated_user
 def index(request):
+    
     return render(request, 'index.html')
 @unauthenticated_user
 def user_login(request):
