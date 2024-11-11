@@ -8,9 +8,7 @@ from .forms import *
 from .decorators import unauthenticated_user, allowed_users
 from django.db.models import Q
 # Create your views here.
-@unauthenticated_user
 def index(request):
-    
     return render(request, 'index.html')
 @unauthenticated_user
 def user_login(request):
@@ -50,12 +48,15 @@ def dataentry_view(request):
     students = Student.objects.all()
     intermediaries = Intermediary.objects.all()
     schools = School.objects.all()
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
 
     students_count = students.count()
     intermediaries_count = intermediaries.count()
     schools_count = schools.count()
     
-    context = {'students':students,'intermediaries':intermediaries,'schools':schools,'students_count':students_count,'intermediaries_count':intermediaries_count,'schools_count':schools_count}
+    context = {'students':students,'intermediaries':intermediaries,'schools':schools,'students_count':students_count,'intermediaries_count':intermediaries_count,'schools_count':schools_count, 'is_dataentry':is_dataentry, 'is_finance':is_finance, 'is_donor':is_donor}
     return render(request, 'userpages/dataentry.html', context)
 # dataentry actions
 @login_required
