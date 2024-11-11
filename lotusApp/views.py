@@ -377,10 +377,16 @@ def donor_view(request):
 @login_required
 @allowed_users(allowed_roles=['Donor'])
 def donor_specific_students(request):
-    students = Student.objects.select_related('donor').filter(donor=request.user)
-    myFilter = StudentFilter(request.GET, queryset=students)
-    students = myFilter.qs
-    context = {'students':students, 'myFilter':myFilter}
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    students = Student.objects.filter(donor=request.user).filter(
+        Q(studentName__icontains=q)|
+        Q(intermediary__intermediaryName__icontains=q)|
+        Q(donor__username__icontains=q)|
+        Q(gender__icontains=q)|
+        Q(level__icontains=q)|
+        Q(class_level__icontains=q)        
+    )
+    context = {'students':students}
     return render (request, 'lists/donor_specific_students.html', context)
 def logout_view(request):
     logout(request)

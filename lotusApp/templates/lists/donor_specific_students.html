@@ -27,12 +27,17 @@
         text-align: center;
         border-radius: 5px;
     }
+    .all{
+      margin: 20px;
+    }
 </style>
 
-<form method= 'get'class="d-flex" role="search">
-    {{ myFilter.form.as_p }}
-    <button class="btn btn-primary" type="submit">Search</button>
-  </form>
+<div class="all">
+  <a href="{% url 'donor_specific_students' %}"class="btn btn-primary">All Students</a>
+</div>
+<form method= 'get'class="d-flex" action="{% url 'donor_specific_students' %}"role="search">
+    <input type="text"name='q'placeholder="Search student...">   
+</form>
 <table style="margin-top: 20px;" class="table table-bordered">
 <thead>
   <tr>
