@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LotusEducationProgram</title>
+    <link rel="icon" href="{% static 'images/icon2.jpg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <div class="toppage"style="background: url('{% static 'images/blacklady.jpg' %}'); background-repeat: no-repeat;background-position: center; background-size: cover;">
+        <div class="pagename">
+            <h1>Lotus Education Program</h1>
+        </div>
+        <div class="navbar">
+            <ul>
+                <a href="{% url 'index' %}"><li>Home</li></a>
+                <a href=""><li>About</li></a>
+                <a href=""><li>Contact us</li></a>
+                <a href=""><li>Statistics</li></a>
+                <a href=""><li>Programs</li></a>
+                <a href="{% url 'login' %}"><li>Login</li></a>
+            </ul>
+        </div>
+    </div>
+    {% block content %}
+
+
+    {% endblock %}
+    <footer>
+        <div class="container">
+            <div class="aboutussec">
+                <h2>About Us</h2>
+                <p>Lotus Education Program</p>
+                <ul class="sci">
+                    <li><a href="#"><img src="{% static 'images/facebook.png' %}"></a></li>
+                    <li><a href="#"><img src="{% static 'images/twitter.png' %}"></a></li>
+                    <li><a href="#"><img src="{% static 'images/whatsapp.png' %}"></a></li>
+                    <li><a href="#"><img src="{% static 'images/instagram.png' %}"></a></li>
+                </ul>
+            </div>
+            <div class="quicklinkssec">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="quicklinkssec">
+                <h2>QuickLinks</h2>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contacts</a></li>
+                    <li><a href="#">Statistics</a></li>
+                    <li><a href="#">Programs</a></li>
+                </ul>
+            </div>
+            <div class="contactssec">
+                <h2>Contact Us</h2>
+                <ul class="info">
+                    <li>
+                        <span><img src="{% static 'images/placeholder.png' %}"></span>
+                        <span> xxxx <br> 
+                            Nairobi,<br> Kenya</span>
+                    </li>
+                    <li>
+                        <span><img src="{% static 'images/icons8-phone-26.png' %}"></span>
+                        <p><a href="tel:+254706111014">+254706111014</a><br>
+                        </p>
+                    </li>
+                    <li>
+                        <span><img src="{% static 'images/gmail.png' %}"></span>
+                        <p><a href="mailto:rmf@gmail.com">&nbsprmf@gmail.com</a><br>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div class="copyrighttext">
+        <p>Copyright Scholarship Management System|| All Rights Reserved</p>
+    </div>
+
+
+</body>
+</html>

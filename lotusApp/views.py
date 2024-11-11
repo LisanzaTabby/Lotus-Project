@@ -251,6 +251,9 @@ def school_list(request):
 def finance_view(request):
     students = Student.objects.all()
     student_count = students.count()
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
 
     donors = Donor.objects.all()
     donor_count = donors.count()
@@ -258,7 +261,7 @@ def finance_view(request):
     employees = Employee.objects.all()
     employee_count = employees.count()
 
-    context = {'students':students,'student_count':student_count,'donors':donors,'donor_count':donor_count,'employees':employees,'employee_count':employee_count}   
+    context = {'students':students,'student_count':student_count,'donors':donors,'donor_count':donor_count,'employees':employees,'employee_count':employee_count, 'is_dataentry':is_dataentry, 'is_finance':is_finance, 'is_donor':is_donor}
     return render(request, 'userpages/finance.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])
@@ -365,8 +368,11 @@ def delete_employee(request,pk):
 @allowed_users(allowed_roles=['Donor'])
 def donor_view(request):
     students = Student.objects.filter(donor=request.user)
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     student_count = students.count()
-    context = {'students':students, 'student_count':student_count}
+    context = {'students':students, 'student_count':student_count, 'is_dataentry':is_dataentry, 'is_finance':is_finance, 'is_donor':is_donor}
     return render(request, 'userpages/donor.html', context)
 @login_required
 @allowed_users(allowed_roles=['Donor'])
