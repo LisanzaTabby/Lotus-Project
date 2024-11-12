@@ -65,6 +65,9 @@ def dataentry_view(request):
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def add_student(request):
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
@@ -76,7 +79,8 @@ def add_student(request):
             return render(request, 'add_templates/add_student.html')
 
     form = StudentForm()
-    return render(request, 'add_templates/add_student.html', {'form': form})
+    context = {'form':form, 'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor}
+    return render(request, 'add_templates/add_student.html', context)
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def add_student_results(request,pk):
@@ -109,6 +113,9 @@ def add_student_results(request,pk):
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def add_intermediary(request):
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     if request.method == 'POST':
         form = intermediaryForm(request.POST)
         if form.is_valid():
@@ -119,10 +126,14 @@ def add_intermediary(request):
             messages.error(request, form.errors)
             return render(request, 'add_templates/add_intermediary.html')
     form = intermediaryForm()
-    return render(request, 'add_templates/add_intermediary.html', {'form': form})
+    context = {'form':form, 'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor}
+    return render(request, 'add_templates/add_intermediary.html', context)
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def add_school(request):
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     if request.method == 'POST':
         form = schoolForm(request.POST)
         if form.is_valid():
@@ -132,8 +143,9 @@ def add_school(request):
         else:
             messages.error(request, form.errors)
             return render(request, 'add_templates/add_school.html')
-    form = schoolForm()    
-    return render(request, 'add_templates/add_school.html', {'form': form})
+    form = schoolForm() 
+    context = {'form':form, 'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor}   
+    return render(request, 'add_templates/add_school.html', context)
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def edit_student(request,pk):
@@ -231,22 +243,30 @@ def student_list(request):
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def intermediary_list(request):
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     intermediaries = Intermediary.objects.filter(
         Q(intermediaryName__icontains=q)|
         Q(location__icontains=q)
     ).order_by('id')
-    return render(request, 'lists/intermediary_list.html', {'intermediaries': intermediaries})
+    context = {'intermediaries':intermediaries, 'is_dataentry':is_dataentry,'is_donor':is_donor,'is_finance':is_finance}
+    return render(request, 'lists/intermediary_list.html', context)
 @login_required
 @allowed_users(allowed_roles=['Dataentry'])
 def school_list(request):
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     schools = School.objects.filter(
         Q(schoolName__icontains=q)|
         Q(location__icontains=q)|
         Q(level__icontains=q)
     ).order_by('id')
-    return render(request, 'lists/school_list.html', {'schools': schools})
+    context = {'schools': schools, 'is_dataentry':is_dataentry,'is_donor':is_donor,'is_finance':is_finance}
+    return render(request, 'lists/school_list.html', context)
 
 # Finance views
 @login_required
@@ -269,17 +289,24 @@ def finance_view(request):
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def donor_list(request):
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     donors = Donor.objects.filter(
         Q(donorName__icontains=q)|
         Q(gender__icontains=q)
     ).order_by('id')
     
-    context = {'donors':donors}
+    context = {'donors':donors, 'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor}
     return render(request, 'lists/donor_list.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def add_donor(request):
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
+
     if request.method == 'POST':
         form = DonorForm(request.POST)
         if form.is_valid():
@@ -290,7 +317,8 @@ def add_donor(request):
             messages.error(request, form.errors)
             return render(request, 'add_templates/add_donor.html', {'form':form})
     form = DonorForm()
-    return render(request, 'add_templates/add_donor.html', {'form':form})
+    context = {'form':form, 'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor}
+    return render(request, 'add_templates/add_donor.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def edit_donor(request, pk):
@@ -319,17 +347,23 @@ def delete_donor(request, pk):
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def employee_list(request):
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     employees = Employee.objects.filter(
         Q(employeeName__icontains=q)|
         Q(gender__icontains=q)|
         Q(department__icontains=q)
     ).order_by('id')
-    context={'employees':employees}
+    context={'employees':employees,'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor}
     return render(request, 'lists/employee_list.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def add_employee(request):
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     if request.method == 'POST':
         form = EmployeeForm(request.POST)
         if form.is_valid():
@@ -340,7 +374,8 @@ def add_employee(request):
             messages.error(request, form.errors)
             return render(request, 'lists/employee_list.html', {'form':form})
     form = EmployeeForm()
-    return render(request, 'add_templates/add_employee.html', {'form':form})
+    context = {'form':form, 'is_dataentry':is_dataentry,'is_finance':is_finance,'is_donor':is_donor}
+    return render(request, 'add_templates/add_employee.html', context)
 @login_required
 @allowed_users(allowed_roles=['Finance'])
 def edit_employee(request,pk):
@@ -377,9 +412,14 @@ def donor_view(request):
     student_count = students.count()
     context = {'students':students, 'student_count':student_count, 'is_dataentry':is_dataentry, 'is_finance':is_finance, 'is_donor':is_donor}
     return render(request, 'userpages/donor.html', context)
+
 @login_required
 @allowed_users(allowed_roles=['Donor'])
 def donor_specific_students(request):
+    students = Student.objects.filter(donor=request.user)
+    is_dataentry = request.user.groups.filter(name='Dataentry').exists()
+    is_finance = request.user.groups.filter(name='Finance').exists()
+    is_donor = request.user.groups.filter(name='Donor').exists()
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     students = Student.objects.filter(donor=request.user).filter(
         Q(studentName__icontains=q)|
@@ -389,7 +429,7 @@ def donor_specific_students(request):
         Q(level__icontains=q)|
         Q(class_level__icontains=q)        
     )
-    context = {'students':students}
+    context = {'students':students, 'is_dataentry': is_dataentry,'is_donor':is_donor, 'is_finance': is_finance}
     return render (request, 'lists/donor_specific_students.html', context)
 def logout_view(request):
     logout(request)
