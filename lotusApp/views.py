@@ -9,6 +9,7 @@ from .decorators import unauthenticated_user, allowed_users
 from django.db.models import Q
 # Create your views here.
 def index(request):
+
     return render(request, 'index.html')
 @unauthenticated_user
 def user_login(request):
@@ -34,9 +35,11 @@ def user_login(request):
     return render(request, 'login.html')
 @login_required
 def student_profile_view(request, pk):
+
     student = get_object_or_404(Student, id=pk)
     academicprogress = AcademicProgress.objects.filter(student=student).order_by('-year')
     donor_history = StudentDonorHistory.objects.filter(student=student).order_by('-year')
+    
     is_dataentry = request.user.groups.filter(name='Dataentry').exists()
     is_finance = request.user.groups.filter(name='Finance').exists()
     is_donor = request.user.groups.filter(name='Donor').exists()
