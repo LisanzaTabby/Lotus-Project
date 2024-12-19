@@ -82,7 +82,7 @@
         {% endif %}
     </table>
     {% if is_dataentry %}
-    <a href="{ url 'edit_student' student.id }" class="btn btn-primary">Change Donor</a>
+    <a href="{% url 'edit_student' student.id %}" class="btn btn-primary">Change Donor</a>
     {%  endif %}
     <h3>Academic Progress</h3>
     <table style="margin-top: 20px;" class="table table-bordered">
@@ -151,7 +151,7 @@
     {% if is_dataentry %}
        <a href="{% url 'add_student_results' student.id %}" class="btn btn-primary">Add Results</a>        
     {% endif %}
-
+<!--------------------
     <h3>Fees Payments</h3>
     <table style="margin-top: 20px;" class="table table-bordered">
         <thead>
@@ -188,7 +188,7 @@
         {% endif %}
     </table>
     
-    
+------->
     <p>Date added: {{ student.date_added }}</p>
 
     <a href="" class="btn btn-primary">Print Student Profile</a>
