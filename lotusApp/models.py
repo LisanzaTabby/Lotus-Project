@@ -133,14 +133,6 @@ class Student(models.Model):
                     year = timezone.now().year,
                     changed_on = timezone.now().date()
                 )
-            else:
-                StudentDonorHistory.objects.create(
-                    student = self,
-                    donor = self.donor,
-                    school_level = self.class_level,
-                    year = timezone.now().year,
-                    changed_on = timezone.now().date()
-                )
             if original_student.class_level != self.class_level:
                 AcademicProgress.objects.create(
                     student = self,
@@ -148,15 +140,7 @@ class Student(models.Model):
                     class_level = original_student.class_level,
                     date_added = timezone.now().date()
                 )
-            else:
-                AcademicProgress.objects.create(
-                    student = self,
-                    year = timezone.now().year,
-                    class_level = self.class_level,
-                    date_added = timezone.now().date()
-                )
-
-
+                
         super().save(*args, **kwargs)
 class StudentDonorHistory(models.Model):
     student = models.ForeignKey(Student, related_name='student_donor_history', on_delete=models.CASCADE, null=True, blank=True)

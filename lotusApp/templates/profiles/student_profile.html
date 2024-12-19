@@ -95,10 +95,10 @@
                 {% endif %}
             </tr>
         </thead>
+        {% if academicprogress %}
         <tbody>
-            {% if academicprogress %}
+            {% for progress in academicprogress %}
             <tr>
-                {% for progress in academicprogress %}
                 <td>{{ progress.year }}</td>
                 <td>{{ progress.class_level }}</td>
                 {% if is_dataentry %}
@@ -106,12 +106,12 @@
                     <a href="" class="btn btn-primary">Edit</a>
                 </td>
                 {% endif %}
-                {% endfor %}
+            {% endfor %}
             </tr>
-            {% endif %}
+        {% endif %}
         </tbody>
     </table>
-
+<!--------------------
     <h3>Exam Results</h3>
     <table style="margin-top: 20px;" class="table table-bordered">
         <thead>
@@ -151,7 +151,6 @@
     {% if is_dataentry %}
        <a href="{% url 'add_student_results' student.id %}" class="btn btn-primary">Add Results</a>        
     {% endif %}
-<!--------------------
     <h3>Fees Payments</h3>
     <table style="margin-top: 20px;" class="table table-bordered">
         <thead>
@@ -187,7 +186,6 @@
         </tr>
         {% endif %}
     </table>
-    
 ------->
     <p>Date added: {{ student.date_added }}</p>
 
