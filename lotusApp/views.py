@@ -35,7 +35,7 @@ def user_login(request):
     return render(request, 'login.html')
 @login_required
 def student_profile_view(request, pk):
-
+    
     student = get_object_or_404(Student, id=pk)
     academicprogress = AcademicProgress.objects.filter(student=student).order_by('-year')
     donor_history = StudentDonorHistory.objects.filter(student=student).order_by('-year')
