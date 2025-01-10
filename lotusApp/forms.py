@@ -119,14 +119,12 @@ class ExamResultForm(ModelForm):
         model = ExamResults
         fields = '__all__'
         widgets = {
-            'student': forms.Select(attrs={'class': 'form-control'}),
             'term': forms.Select(attrs={'class': 'form-control'}),
             'subject': forms.TextInput(attrs={'class': 'form-control'}),
             'score': forms.NumberInput(attrs={'class': 'form-control'}),
             'mean_grade': forms.TextInput(attrs={'class': 'form-control'}),
         }
         labels = {
-            'student': 'Student',
             'term': 'Term',
             'subject': 'Subject',
             'score': 'Score',

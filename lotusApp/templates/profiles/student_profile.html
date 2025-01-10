@@ -111,7 +111,7 @@
         {% endif %}
         </tbody>
     </table>
-<!--------------------
+
     <h3>Exam Results</h3>
     <table style="margin-top: 20px;" class="table table-bordered">
         <thead>
@@ -125,14 +125,14 @@
                 {% endif %}
             </tr>
         </thead>
-        {% if examresults %}
+        {% if results %}
         <tbody>
-            {% for result in examresults %}
+            {% for result in results %}
             <tr>
-                <td>{{ result.exam.exam_name }}</td>
+                <td>{{ result.term }}</td>
                 <td>{{ result.subject }}</td>
                 <td>{{ result.score }}</td>
-                <td>{{ result.grade }}</td>
+                <td>{{ result.mean_grade }}</td>
                 {% if is_dataentry %}
                 <td>
                     <a href="" class="btn btn-primary">Edit</a>
@@ -149,8 +149,9 @@
         {% endif %}
     </table>
     {% if is_dataentry %}
-       <a href="{% url 'add_student_results' student.id %}" class="btn btn-primary">Add Results</a>        
+        <a href="{% url 'update_exam_results' student.id %}" class="btn btn-primary">Update Exam Results</a>
     {% endif %}
+<!------
     <h3>Fees Payments</h3>
     <table style="margin-top: 20px;" class="table table-bordered">
         <thead>
