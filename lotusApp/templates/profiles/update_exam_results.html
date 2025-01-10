@@ -1,0 +1,50 @@
+{% extends 'navbar/main_navbar.html' %}
+
+{% block title %} Lotus Dataentry {% endblock %}
+
+{% block content %}
+<style>
+    h2{
+        text-align: center;
+    }
+    .main{
+        margin: 20px;
+        padding: 20px;
+        background: aqua;
+        border-radius: 10px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 1em;
+    }
+    
+</style>
+<h2>Add Student Results Form</h2>
+<div class="main">
+    <h1>Exam Results for {{ student.studentName }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.term.label_tag }}
+            {{ form.term }}            
+        </div>
+        
+        <div class="form-group">
+            {{ form.subject.label_tag }}
+            {{ form.subject }}
+        </div>
+        <div class="form-group">
+            {{ form.score.label_tag }}
+            {{ form.score }}
+        </div>
+        <div class="form-group">
+            {{ form.mean_grade.label_tag }}
+            {{ form.mean_grade }}
+        </div>
+          
+        <button class="btn btn-primary" type="submit">Save</button>
+        
+    </form>
+</div>
+{% endblock %}

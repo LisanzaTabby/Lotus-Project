@@ -142,6 +142,19 @@ class Student(models.Model):
                 )
 
         super().save(*args, **kwargs)
+    def update_exam_results(self, term, subject, score, mean_grade):
+        exam_term,  created = ExamResults.objects.get_or_create(term=term)
+        exam_result, created = ExamResults.objects.updated_or_create(
+            student=self,
+            term=exam_term,
+            subject=subject,
+            defaults={
+                'score': score,
+                'mean_grade': mean_grade,
+                'updated_at': timezone.now()
+            }
+        )
+        return exam_result
 class StudentDonorHistory(models.Model):
     student = models.ForeignKey(Student, related_name='student_donor_history', on_delete=models.CASCADE, null=True, blank=True)
     donor = models.ForeignKey(User, related_name='student_donor', on_delete=models.CASCADE, null=True, blank=True)
@@ -177,13 +190,18 @@ class Exam(models.Model):
         ('Term2', 'Term2'),
         ('Term3', 'Term3'),
     )
-    term = models.CharField(max_length=5, choices=LEVEL,null=True, blank=True)
+    term = models.CharField(max_length=5, choices=LEVEL, null=True, blank=True)
     def __str__(self):
         return f'{self.term}'
         
 class ExamResults(models.Model):
+    LEVEL = (
+        ('Term1', 'Term1'),
+        ('Term2', 'Term2'),
+        ('Term3', 'Term3'),
+    )
     student = models.ForeignKey(Student, related_name='student_exam_results', on_delete=models.CASCADE, null=True, blank=True)
-    term = models.ForeignKey(Exam, related_name='term_exam_results',on_delete=models.CASCADE,null=True, blank=True)
+    term = models.CharField(max_length=5, choices=LEVEL, null=True, blank=True)
     subject = models.CharField(max_length=100, null=True, blank=True)
     score = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     mean_grade = models.CharField(max_length=10, null=True, blank=True)
