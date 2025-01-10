@@ -1,12 +1,18 @@
 # Lotus-Project
-A scholarship Management System
-The system aims to help the Lotus Education Trust manage its student Beneficiary information in an automated manner, so they will have to abandon the manual Excel way of doing things.
-Its main aim is to help in performing the following actions:
-1. perform the CRUD Operations on student, Employee, and Donor Data.
-2. Only be an in-house web application for the allowed users such as the Donor, Student, and Finance.
-3. Automated the profiling process of the students in that Donor can view their student's profiles from their system Donor accounts, as inputted by the DataEntry Personnel.
-4. Allow Donors to be able to view their financial contributions and how their fee contributions are being made from the system.
 
-Below is the Welcoming page of the Lotus Education Trust:
+### Scholarship Management System  
+
+The **Lotus-Project** is a web-based application designed to streamline the management of student beneficiary information for the Lotus Education Trust. This system eliminates the need for manual processes like maintaining Excel files, providing a more efficient and automated solution.  
+
+### Core Features  
+1. **CRUD Operations**: Manage data for students, employees, and donors with ease.  
+2. **Access Control**: Securely restrict access to authorized users, including donors, students, and finance personnel.  
+3. **Automated Student Profiling**: Enable donors to view detailed profiles of their sponsored students, as inputted by the DataEntry team, directly from their donor accounts.  
+4. **Financial Transparency**: Allow donors to monitor their financial contributions and track the allocation of their fee payments through the system.  
+
+### Welcome Page  
+The Lotus Education Trust web application offers a user-friendly interface designed to enhance the experience of all users. From managing data to ensuring transparency in financial contributions, the system empowers stakeholders to focus on the core mission of supporting education.  
+
+This system is tailored to meet the specific needs of the Lotus Education Trust and its beneficiaries, fostering seamless collaboration and management.  
 
 ![image](https://github.com/user-attachments/assets/21bbed8f-5c64-4820-9d74-8b8fafbe53c6)
