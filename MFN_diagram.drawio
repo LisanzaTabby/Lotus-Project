@@ -1,0 +1,100 @@
+<mxfile host="app.diagrams.net" modified="2025-02-05T00:00:00.000Z" agent="Mozilla/5.0 (Windows)" etag="MFNNetworkDesign" version="14.6.13" type="device">
+  <diagram id="diagramMFN" name="MFN Network Design">
+    <mxGraphModel dx="1024" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0">
+      <root>
+        <!-- Root elements -->
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- MFN Headend block -->
+        <mxCell id="2" value="MFN Headend&#xa;(3 Routers, Cable Modem Router)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="320" y="30" width="260" height="80" as="geometry"/>
+        </mxCell>
+        
+        <!-- Cable Modem Router (distinct, but connected to Headend) -->
+        <mxCell id="3" value="Cable Modem Router" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="600" y="30" width="180" height="80" as="geometry"/>
+        </mxCell>
+        
+        <!-- Fiber-Optic Backbone Ring -->
+        <mxCell id="4" value="Fiber-Optic Backbone (Ring)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="250" y="140" width="400" height="400" as="geometry"/>
+        </mxCell>
+        
+        <!-- Data Routers on the Fiber Ring -->
+        <mxCell id="5" value="Data Router 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="420" y="140" width="120" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="6" value="Data Router 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="270" y="420" width="120" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="7" value="Data Router 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="520" y="420" width="120" height="40" as="geometry"/>
+        </mxCell>
+        
+        <!-- Business Premises (example connected to Data Router 1) -->
+        <mxCell id="8" value="Business Premises&#xa;(Media Converter, 100 Mbps Switch)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="420" y="80" width="220" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Hybrid Fiber-Coax Node for Residential Service -->
+        <mxCell id="9" value="Hybrid Fiber-Coax Node" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="720" y="500" width="160" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Residential Home connected to the Hybrid Node -->
+        <mxCell id="10" value="Residential Home" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#039be5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="580" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Wireless Access Point for future expansion -->
+        <mxCell id="11" value="Wireless Access Point" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f4c3;strokeColor=#afb42b;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="100" y="500" width="160" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Connecting Edges -->
+        <!-- MFN Headend to Fiber Ring -->
+        <mxCell id="e1" edge="1" parent="1" source="2" target="4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Cable Modem Router to Fiber Ring -->
+        <mxCell id="e2" edge="1" parent="1" source="3" target="4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Fiber Ring to Data Routers -->
+        <mxCell id="e3" edge="1" parent="1" source="4" target="5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="4" target="6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="4" target="7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Data Router 1 to Business Premises -->
+        <mxCell id="e6" edge="1" parent="1" source="5" target="8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Fiber Ring to Hybrid Fiber-Coax Node -->
+        <mxCell id="e7" edge="1" parent="1" source="4" target="9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Hybrid Node to Residential Home -->
+        <mxCell id="e8" edge="1" parent="1" source="9" target="10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Fiber Ring to Wireless Access Point -->
+        <mxCell id="e9" edge="1" parent="1" source="4" target="11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
