@@ -201,13 +201,18 @@
         <mxCell id="mrlbMcpsEWyVSAu99CpQ-66" value="&lt;div&gt;&lt;font style=&quot;color: rgb(0, 0, 0); font-size: 13px;&quot;&gt;&lt;b&gt;Media converter&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="mrlbMcpsEWyVSAu99CpQ-91">
           <mxGeometry x="935" y="695" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mrlbMcpsEWyVSAu99CpQ-67" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;EthernetSwitch&lt;/b&gt;&lt;/font&gt;" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#6881B3;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.switch;" vertex="1" parent="mrlbMcpsEWyVSAu99CpQ-91">
+        <mxCell id="mrlbMcpsEWyVSAu99CpQ-67" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;100Mbps EthernetSwitch&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#6881B3;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.switch;" vertex="1" parent="mrlbMcpsEWyVSAu99CpQ-91">
           <mxGeometry x="970" y="840" width="55" height="40" as="geometry" />
         </mxCell>
         <mxCell id="mrlbMcpsEWyVSAu99CpQ-68" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="mrlbMcpsEWyVSAu99CpQ-91" source="mrlbMcpsEWyVSAu99CpQ-67">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="830" y="901" as="sourcePoint" />
             <mxPoint x="890" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mrlbMcpsEWyVSAu99CpQ-95" value="UTP Cable" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="mrlbMcpsEWyVSAu99CpQ-68">
+          <mxGeometry x="0.05" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="mrlbMcpsEWyVSAu99CpQ-69" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="mrlbMcpsEWyVSAu99CpQ-91" source="mrlbMcpsEWyVSAu99CpQ-67">
@@ -219,6 +224,11 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="mrlbMcpsEWyVSAu99CpQ-97" value="UTP Cable" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="mrlbMcpsEWyVSAu99CpQ-69">
+          <mxGeometry x="-0.0442" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="mrlbMcpsEWyVSAu99CpQ-70" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="mrlbMcpsEWyVSAu99CpQ-91">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1025" y="851" as="sourcePoint" />
@@ -227,6 +237,11 @@
               <mxPoint x="1055" y="851" />
               <mxPoint x="1065" y="851" />
             </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mrlbMcpsEWyVSAu99CpQ-96" value="UTP Cable" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="mrlbMcpsEWyVSAu99CpQ-70">
+          <mxGeometry x="-0.1779" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="mrlbMcpsEWyVSAu99CpQ-71" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;Server&lt;/b&gt;&lt;/font&gt;" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#6881B3;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.web_server;" vertex="1" parent="mrlbMcpsEWyVSAu99CpQ-91">
@@ -285,6 +300,9 @@
         </mxCell>
         <mxCell id="mrlbMcpsEWyVSAu99CpQ-88" value="&lt;b&gt;NEIGHBOURHOOD &amp;amp; HOME&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="mrlbMcpsEWyVSAu99CpQ-91">
           <mxGeometry x="280" y="1458" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mrlbMcpsEWyVSAu99CpQ-92" value="&lt;b&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;CITY OF MAPLELAND OREGON(MAPLE FIBER NETWORK)&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="340" y="-720" width="580" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
